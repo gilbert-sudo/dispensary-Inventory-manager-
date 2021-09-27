@@ -32,8 +32,26 @@ if (isset($_POST['acao'])) {
 ?>
 
 <?php
+// pagination
+$numRows = 0;
+$itemsPerPage = 5;
+$totalItemReq = $db->query('SELECT id FROM tb_produtos');
+while ($row = $totalItemReq->fetch(SQLITE3_ASSOC)) {
+    ++$numRows;
+}
+$totalItem = $numRows;
+$totalPages = ceil($totalItem/$itemsPerPage);
+if (isset($_GET['page']) AND !empty($_GET['page']) AND $_GET['page'] > 0 AND $_GET['page'] <= $totalItem) {
+    $_GET['page'] = intval($_GET['page']);
+    $currentPage = $_GET['page'];
+} else {
+    $currentPage = 1;
+}
 
-$sql = $db->prepare("SELECT * FROM `tb_produtos`");
+$begin = ($currentPage-1)*$itemsPerPage;
+//end pagination
+
+$sql = $db->prepare("SELECT * FROM `tb_produtos` LIMIT $begin,$itemsPerPage");
 $sql->execute();
 $produtos = $sql->fetchAll();
 ?>
@@ -92,11 +110,15 @@ $produtos = $sql->fetchAll();
             <div class="col-md-12">
                 <ul class="pagination">
                     <li class="disabled"><a>&lt; Précedant</a></li>
-                    <li class="disabled"><a>1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
+                    <?php for ($i=1; $i < $totalPages; $i++) { 
+                        if ($i == $currentPage) {
+                            echo '<li><a  style="background-color: #75aca8; color:white;" href="#">'.$i.'</a></li>';
+                        } else {
+                            echo '<li><a href="?pg=produtos&page='.$i.'">'.$i.'</a></li>';
+                        }
+                    } ?>
                     <li class="next"><a href="#" rel="next">Suivant &gt;</a></li>
                 </ul><!-- /.pagination -->
             </div>
         </div> <!-- /#bottom -->
-    </div>
+    </div> 
