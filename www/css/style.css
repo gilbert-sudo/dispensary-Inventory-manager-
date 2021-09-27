@@ -1,0 +1,93 @@
+.cadastro-cliente{
+    margin-left: 100px;
+}
+.page-header{
+    margin-top: 2px;
+}
+.nav img{
+    border-radius: 50px;
+}
+.lista-cliente{
+    margin-left: 50px;
+}
+#list{
+    height: 400px;
+}
+.btn-lista{
+    margin-top: 30px;
+}
+.adicionar-usuario{
+    margin-left: 30px;
+}
+
+
+.form-usuario{
+    margin-left: 80px;
+}
+.visualizar-usuario{
+    margin-left: 50px;
+}
+.visualizar-usuario.actions{
+    margin-left: 40px;
+}
+.visualizar-fornecedor{
+    margin-left: 30px;
+    padding-top: 15px;
+}
+.visualizar-fornecedor.col-md-4{
+    margin-left: 20px;
+    padding-top: 20px;
+}
+.lista-cliente h4{
+   font-size: 26px;
+    padding-right: 10px;
+}
+
+
+.h1-mensagem{
+    margin-left: 40px;
+    font-size: 45px;
+
+}
+.h2-mensagem{
+    margin-left: 60px;
+    font-size: 30px;
+}
+.tb-result{
+    margin-top: 10px;
+    padding-top: 5px;
+    background-color: white;
+}
+.btn btn-success btn-large btn-block{
+    background-color: #1c7430;
+}
+.cc{
+    margin-top: 50px;
+}
+.pag{
+    margin-top: 20px;
+    margin-left: 30px;
+    padding: 10px;
+}
+.pag input{
+    margin-top: 20px;
+}
+.form-pag{
+    margin-top: 100px;
+}
+.container-fluid label{
+    color: black;
+}
+.ff{
+    margin-top: 50px;
+    margin-left: 30px;
+}
+.ff label{
+    margin-left: 20px;
+    margin-top: 50px;
+}
+.pdf{
+    margin-left: 10px;
+    background-color: #fffa90;
+    width: 350px;
+}

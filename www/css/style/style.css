@@ -1,0 +1,5 @@
+#sugg:hover{
+    background-color: black;
+    border: 1px solid whitesmoke;
+    cursor: default;
+}
