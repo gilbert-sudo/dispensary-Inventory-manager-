@@ -51,7 +51,25 @@
           <div class="Block21">
             <div class="block" style="display:flex; flex-direction:column;">
               <input type="text" name="nom" placeholder="Utilisateur">
-              <input type="text" name="code" placeholder="Mot de passe">
+              <input type="password" class="passadmin" name="code" placeholder="Mot de passe">
+              <input type="button" style="margin: top 30px; cursor: default; border:1px solid black; padding:3px;" class="passview" value="👁‍🗨 Afficher le mots de passe">                <script>
+                  var passview = document.querySelector(".passview");
+                  var passadmin = document.querySelector(".passadmin");
+                  passview.addEventListener("click", function(e) {
+                    e.preventDefault();
+
+                    if (passadmin.type == "password") {
+                      passview.className = "fa fa-check-square-o passview"
+                      passview.value = "👁‍🗨 Cacher le mots de passe"
+                      passadmin.type = "text"
+                    } else {
+                      passview.className = "fa fa-square-o passview"
+                      passview.value = "👁‍🗨 Afficher le mots de passe"
+                      passadmin.type = "password"
+                    }
+                    return false;
+                  });
+                </script>
             </div>
           </div>
         </div>

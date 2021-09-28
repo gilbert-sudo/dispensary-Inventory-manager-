@@ -1,7 +1,7 @@
 <?php
 require_once('../classes/connect.php');
 $db = connect('../pharmacie.db');
-$result = $db->prepare("SELECT * FROM tb_produtos ORDER BY descricao DESC");
+$result = $db->prepare("SELECT * FROM tb_produtos ORDER BY descricao ASC");
 $result->execute();
 $items = $result->fetchAll();
 ?>

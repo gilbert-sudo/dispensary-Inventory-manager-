@@ -2,7 +2,7 @@
 include ('classes/Mysql.php');
 if(isset($_GET['id'])){
     $id= (int)$_GET['id'];
-    $sql= MySql::conectar()->prepare("SELECT * FROM `tb_fornecedores` where id=$id");
+    $sql= $db->prepare("SELECT * FROM `tb_fornecedores` where id=$id");
     $sql->execute();
     $fornecedor= $sql->fetch();
 }

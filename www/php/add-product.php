@@ -11,8 +11,9 @@ $db = connect('../pharmacie.db');
             $venda = $_POST['venda'];
             $quantidade = $_POST['quantidade'];
             $principio = $_POST['principio'];
+            $benef = $venda-$custo;
 
-            $sql = $db->prepare("INSERT INTO tb_produtos (descricao, codInterno, codBarras, fornecedor, custo, venda, principio, quantidade) VALUES (:descricao, :codInterno, :codBarras, :fornecedor, :custo, :venda, :principio, :quantidade)");
+            $sql = $db->prepare("INSERT INTO tb_produtos (descricao, codInterno, codBarras, fornecedor, custo, venda, principio, quantidade, benefice) VALUES (:descricao, :codInterno, :codBarras, :fornecedor, :custo, :venda, :principio, :quantidade, :benef)");
             $sql->bindValue(':descricao', $descricao);
             $sql->bindValue(':codInterno', $codInterno);
             $sql->bindValue(':codBarras', $codBarras);
@@ -21,6 +22,7 @@ $db = connect('../pharmacie.db');
             $sql->bindValue(':venda', $venda);
             $sql->bindValue(':principio', $principio);
             $sql->bindValue(':quantidade', $quantidade);
+            $sql->bindValue(':benef', $benef);
             $sql->execute();
 
 

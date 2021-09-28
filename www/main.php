@@ -101,7 +101,7 @@ $finalcode = createRandomPassword();
                             }
                         } ?>>
                         <a href="?pg=caisse">
-                            <i class="pe-7s-user"></i>
+                            <i class="pe-7s-headphones"></i>
                             <p>Caisse</p>
                         </a>
                     </li>
@@ -113,6 +113,16 @@ $finalcode = createRandomPassword();
                         <a href="?pg=cliente">
                             <i class="pe-7s-users"></i>
                             <p>Les clients</p>
+                        </a>
+                    </li>
+                    <li <?php if (isset($_GET['pg'])) {
+                            if ($_GET['pg'] == "categorie") {
+                                print 'class="active"';
+                            }
+                        } ?>>
+                        <a href="?pg=categorie">
+                            <i class="pe-7s-ticket"></i>
+                            <p>Catégories</p>
                         </a>
                     </li>
                     <li <?php if (isset($_GET['pg'])) {
@@ -151,7 +161,7 @@ $finalcode = createRandomPassword();
                             }
                         } ?>>
                         <a href="?pg=extras">
-                            <i class="pe-7s-tools"></i>
+                            <i class="pe-7s-server"></i>
                             <p>Suppléments</p>
                         </a>
                     </li>

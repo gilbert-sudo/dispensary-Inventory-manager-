@@ -11,7 +11,7 @@ $produto = $sql->fetch();
 ?>
 <div class="cadastro-cliente">
     <h3 class="page-header">Editer un produit</h3>
-    <form class="form-cliente" method="post" enctype="multipart/form-data" action="?pg=produtos&id=<?=$id?>">
+    <form class="form-cliente" method="post" enctype="multipart/form-data" action="?pg=produtos&id=<?= $id ?>">
 
         <div class="row">
             <div class="form-group col-md-6">
@@ -47,9 +47,28 @@ $produto = $sql->fetch();
         </div>
         <div class="row">
 
-            <div class="form-group col-md-5">
-                <label>Description</label>
-                <input type="text" required type="text" class="form-control" name="principio" value="<?php echo $produto['principio'] ?>">
+            <div class="form-group col-sm-5">
+                <label for="exampleInputEmail1">Catégorie: </label>
+                <?php
+                $sql = $db->prepare("SELECT * FROM tb_categorie");
+                $sql->execute();
+                $reg = $sql->fetchAll();
+                $a = count($reg);
+                $cont = 0;
+                ?>
+                <select name="principio" size="1" style="width: 292px; height: 38px; border-radius: 4px">
+                    <option value="<?php echo $produto['principio']; ?>">
+                        <?php echo $produto['principio'] ?>
+                    </option>
+                    <?php while ($cont < $a) { ?>
+                        <option value="<?php echo $reg[$cont]['nom']; ?>">
+                            <?php echo $reg[$cont]['nom'] ?>
+                        </option>
+                    <?php $cont++;
+                    }
+                    ?>
+
+                </select>
             </div>
 
         </div>

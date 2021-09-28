@@ -63,14 +63,23 @@ include('classes/Mysql.php');
 
             <div class="form-group col-sm-5">
                 <label for="exampleInputEmail1">Catégorie: </label>
-
+                <?php
+                $sql = $db->prepare("SELECT * FROM tb_categorie");
+                $sql->execute();
+                $reg = $sql->fetchAll();
+                $a = count($reg);
+                $cont = 0;
+                ?>
                 <select name="principio" size="1" style="width: 292px; height: 38px; border-radius: 4px">
-                    <option value="MEDICAMENT">MEDICAMENT</option>
-                    <option value="IMRA">IMRA</option>
-                    <option value="CONSOMMABLES MEDICAUX">CONSOMMABLES MEDICAUX</option>
+                    <?php while ($cont < $a) { ?>
+                        <option value="<?php echo $reg[$cont]['nom']; ?>">
+                            <?php echo $reg[$cont]['nom'] ?>
+                        </option>
+                    <?php $cont++;
+                    }
+                    ?>
 
                 </select>
-
             </div>
 
         </div>

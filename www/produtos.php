@@ -16,8 +16,9 @@ if (isset($_POST['acao'])) {
     $venda = $_POST['venda'];
     $quantidade = $_POST['quantidade'];
     $principio = $_POST['principio'];
+    $benef = $venda-$custo;
 
-    $sql = $db->prepare("UPDATE tb_produtos SET descricao = :descricao, codInterno = :codInterno, codBarras = :codBarras, fornecedor = :fornecedor, custo = :custo, venda = :venda , principio = :principio, quantidade = :quantidade WHERE id = :id");
+    $sql = $db->prepare("UPDATE tb_produtos SET descricao = :descricao, codInterno = :codInterno, codBarras = :codBarras, fornecedor = :fornecedor, custo = :custo, venda = :venda , principio = :principio, quantidade = :quantidade, benefice = :benefice WHERE id = :id");
     $sql->bindValue(':id', $id);
     $sql->bindValue(':descricao', $descricao);
     $sql->bindValue(':codInterno', $codInterno);
@@ -27,6 +28,7 @@ if (isset($_POST['acao'])) {
     $sql->bindValue(':venda', $venda);
     $sql->bindValue(':principio', $principio);
     $sql->bindValue(':quantidade', $quantidade);
+    $sql->bindValue(':benefice', $benef);
     $sql->execute();
 }
 ?>
@@ -34,21 +36,21 @@ if (isset($_POST['acao'])) {
 <?php
 // pagination
 $numRows = 0;
-$itemsPerPage = 5;
+$itemsPerPage = 100;
 $totalItemReq = $db->query('SELECT id FROM tb_produtos');
 while ($row = $totalItemReq->fetch(SQLITE3_ASSOC)) {
     ++$numRows;
 }
 $totalItem = $numRows;
-$totalPages = ceil($totalItem/$itemsPerPage);
-if (isset($_GET['page']) AND !empty($_GET['page']) AND $_GET['page'] > 0 AND $_GET['page'] <= $totalItem) {
+$totalPages = ceil($totalItem / $itemsPerPage) + 1;
+if (isset($_GET['page']) and !empty($_GET['page']) and $_GET['page'] > 0 and $_GET['page'] <= $totalItem) {
     $_GET['page'] = intval($_GET['page']);
     $currentPage = $_GET['page'];
 } else {
     $currentPage = 1;
 }
 
-$begin = ($currentPage-1)*$itemsPerPage;
+$begin = ($currentPage - 1) * $itemsPerPage;
 //end pagination
 
 $sql = $db->prepare("SELECT * FROM `tb_produtos` LIMIT $begin,$itemsPerPage");
@@ -109,16 +111,28 @@ $produtos = $sql->fetchAll();
         <div id="bottom" class="row">
             <div class="col-md-12">
                 <ul class="pagination">
-                    <li class="disabled"><a>&lt; Précedant</a></li>
-                    <?php for ($i=1; $i < $totalPages; $i++) { 
+                    <?php if ($currentPage != 1) {
+                        $prev = $currentPage - 1;
+                        echo '<li class="prev"><a href="?pg=produtos&page=' . ($prev) . '" rel="next">&lt; Précedant</a></li>';
+                    } else {
+                        echo '<li><a href="#">&lt; Précedant</a></li>';
+                    }
+                    ?>
+                    <?php for ($i = 1; $i < $totalPages; $i++) {
                         if ($i == $currentPage) {
-                            echo '<li><a  style="background-color: #75aca8; color:white;" href="#">'.$i.'</a></li>';
+                            echo '<li><a  style="background-color: #75aca8; color:white;" href="#">' . $i . '</a></li>';
                         } else {
-                            echo '<li><a href="?pg=produtos&page='.$i.'">'.$i.'</a></li>';
+                            echo '<li><a href="?pg=produtos&page=' . $i . '">' . $i . '</a></li>';
                         }
                     } ?>
-                    <li class="next"><a href="#" rel="next">Suivant &gt;</a></li>
+                    <?php if ($currentPage < ($totalPages - 1)) {
+                        echo '<li class="next"><a href="?pg=produtos&page=' . (++$currentPage) . '" rel="next">Suivant &gt;</a></li>';
+                    } else {
+                        echo '<li class="next"><a href="#" rel="next">Suivant &gt;</a></li>';
+                    }
+                    ?>
+
                 </ul><!-- /.pagination -->
             </div>
         </div> <!-- /#bottom -->
-    </div> 
+    </div>
