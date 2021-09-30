@@ -1,6 +1,5 @@
 <?php
 include( 'classes/Mysql.php' );
-
 ?>
 
 <div class="container-fluid">

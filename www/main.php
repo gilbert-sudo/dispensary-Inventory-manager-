@@ -145,12 +145,8 @@ $finalcode = createRandomPassword();
                             <p>Fournisseurs</p>
                         </a>
                     </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "relatorio_clientes") {
-                                print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=relatorio_clientes">
+                    <li>
+                        <a href="chart/dashboard.php">
                             <i class="pe-7s-graph2"></i>
                             <p>Rapports</p>
                         </a>
