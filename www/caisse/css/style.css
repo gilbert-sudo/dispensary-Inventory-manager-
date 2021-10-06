@@ -33,7 +33,7 @@
 #sugg{
     margin-left: 10px;
     padding-left: 10px;
-    min-width: 300px;
+    min-width: 400px;
     margin-top: 3px;
     background-color: white;
     border: 1px solid #646464;
@@ -41,7 +41,7 @@
 #sugg:hover{
     margin-left: 10px;
     padding-left: 10px;
-    min-width: 300px;
+    min-width: 400px;
     margin-top: 3px;
     background-color: #e6e6e6;
     cursor: default;
@@ -399,6 +399,7 @@ button{
     width: 300px;
     margin-top: 30px;
 }
+ 
 @media only screen and (max-width: 1920px){}
 @media only screen and (max-width: 1680px){}
 @media only screen and (max-width: 1600px){}

@@ -16,13 +16,13 @@ $fornecedores= $sql->fetchAll();
 <div class="lista-cliente">
 
     <div id="top" class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <h2>Fournisseurs</h2>
         </div>
-        <div class="col-sm-5" >
+        <div class="col-sm-5">
 
         </div>
-        <div class="col-sm-4 btn-lista">
+        <div class="col-sm-5 btn-lista">
             <a class="btn btn-primary" href="?pg=adicionar-fornecedor"><i class="fa fa-plus"></i> Ajouter un Fournisseur</a>
             <a class="btn btn-default" href="?pg=fornecedor"><i class="fa fa-refresh"></i> Actualiser</a>
         </div>

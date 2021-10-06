@@ -1,26 +1,36 @@
 <?php
-include('../classes/Sistema.php');
-
-function createRandomPassword()
-{
-  $chars = "003232303232023232023456789";
-  srand((float)microtime() * 1000000);
-  $i = 0;
-  $pass = '';
-  while ($i <= 7) {
-
-    $num = rand() % 33;
-
-    $tmp = substr($chars, $num, 1);
-
-    $pass = $pass . $tmp;
-
-    $i++;
-  }
-  return $pass;
+session_start();
+include('../classes/connect.php');
+$db = connect('../pharmacie.db');
+if (isset($_GET['cancel'])) {
+  $n = $_GET['numero'];
+  $sql = $db->prepare("DELETE FROM tb_produit_vendu where numero = :n");
+  $sql->bindValue(':n', $n);
+  $sql->execute();
 }
-
-$finalcode = createRandomPassword();
+if (isset($_GET['item'])) {
+  $items = $_GET['item'];
+  $item = json_decode($items);
+  $proID = array_column($item, 'codebare');
+  $quant = array_column($item, 'quant');
+  $nbr = (count($proID)) + 1;
+  $a = 0;
+  for ($i = 0; $i < $nbr; $i++) {
+    // fetch the product
+    $sql = $db->prepare("SELECT * FROM `tb_produtos` where codInterno= :code");
+    $sql->bindValue(':code', $proID[$a]);
+    $sql->execute();
+    $pro = $sql->fetch();
+    $reste = $pro['quantidade'];
+    //update quant in the inventory
+    $sql2 = $db->prepare("UPDATE tb_produtos SET quantidade = :quantidade WHERE codInterno = :code");
+    $sql2->bindValue(':code', $proID[$a]);
+    $sql2->bindValue(':quantidade', ($reste+$quant[$a]));
+    $sql2->execute();
+    //END update quant in the inventory
+    ++$a;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +42,28 @@ $finalcode = createRandomPassword();
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <title>Logiciel vente</title>
+  <style>
+    /* ==============================
+         CAISSE LOGGOUT BUTTON
+    =============================== */
+    .loggout {
+      position: absolute;
+      right: 5%;
+      top: 0%;
+      border: 2px solid #00a99d;
+      background-color: white;
+    }
+
+    .loggout>a {
+      color: #00a99d;
+      text-decoration: none;
+    }
+
+    .loggout>a:hover {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -39,63 +71,31 @@ $finalcode = createRandomPassword();
     <div id="Block1" class="col-md-2">
       <img class="logo" src="img/logo.png">
       <ul class="menu">
-        <li <?php if (isset($_GET['pg'])) {
-              if ($_GET['pg'] == "index") {
-                print 'class="active"';
-              }
-            } ?>><a href="#"><span class="c">C</span>AISSE</a></li>
-        <li <?php if (isset($_GET['pg'])) {
-              if ($_GET['pg'] == "stock") {
-                print 'class="active"';
-              }
-            } ?>><a href="stock.php?pg=stock"><span class="c">S</span>TOCK</a></li>
-        <li <?php if (isset($_GET['pg'])) {
-              if ($_GET['pg'] == "parametre") {
-                print 'class="active"';
-              }
-            } ?>><a href="parametre.php?pg=parametre"><span class="c">P</span>ARAMETRE</a></li>
+        <li class="active"><a href="#"><span class="c">C</span>AISSE</a></li>
+        <li><a href="stock.php"><span class="c">S</span>TOCK</a></li>
+        <li><a href="parametre.php"><span class="c">P</span>ARAMETRE</a></li>
       </ul>
     </div>
 
     <div id="Block2" class="col-md-10">
       <!-- app content -->
-      <div class="bar" style="border-top:0.5px solid black;">
-        <p class="text">DISPANSAIRE ANGLICAN</p>
-        <!-- Dropdown menu -->
-        <!-- <div class="dropdown">
-          <div class="dropdown__hover">
-              <img src="uploads/users/<?php echo 'image'; ?>"  class="img-circle img-inline">
-              <span><?php echo 'nameUser'; ?> <i class="caret"></i></span>
-          </div>
-          <div class="dropdown__menu">
-            <a href="#">
-              <i class="glyphicon glyphicon-user"></i>
-              Profile
-            </a>
-            <a href="#" title="edit account">
-              <i class="glyphicon glyphicon-cog"></i>
-              Settings
-            </a>
-            <a href="#">
-              <i class="glyphicon glyphicon-off"></i>
-              Logout
-            </a>
-          </div>
-        </div> -->
-        <!-- Dropdown menu -->
+      <div class="bar" align="center">
+        <table>
+          <td>
+            <p class="text">DISPANSAIRE ANGLICAN</p>
+          </td>
+          <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
+        </table>
       </div>
 
       <div class="title">
-        <p class="titre"><span class="caisse">C</span>AISSE</p>
+        <p class="titre" style="width: 200px;"><span class="caisse">📠</span>Caisse</p>
       </div>
 
       <div class="content">
         <div id="tab" class="col-md-4">
           <div style="margin-bottom: 39px;" id="Block21" class="col-md-5">
-            <select name="medecin" id="type">
-              <option value="Medicament">Medicament</option>
-              <option value="A">Autres</option>
-            </select>
+            <input type="text" id="type" placeholder="Catégorie..." disabled style="margin-top: 0%;">
             <input type="text" id="search" placeholder="Nom ou code du produit">
             <div id="match-list"></div>
             <div class="stock">
@@ -149,11 +149,12 @@ $finalcode = createRandomPassword();
               </ul>
             </div>
             <div class="bouton2">
-              <button type="submit" name="facturer">Encaisser</button>
-              <button onclick="return false;">Annuler</button>
+              <button type="submit" name="facturer" style="width: 140px;">📠 Encaisser</button>
+              <button><a href="sales.php" style="text-decoration:none; color:black;">🛒 Ventes</a></button>
+              <button><a href="user.php" style="text-decoration:none; color:black;">➕ Clients</a></button>
             </div>
           </form>
-          <?php if (isset($_POST['finaliser']) & !empty($_POST['cliente'])) {
+          <?php if (isset($_GET['finaliser'])) {
             include('cupon-fiscal.php');
           } ?>
         </div>

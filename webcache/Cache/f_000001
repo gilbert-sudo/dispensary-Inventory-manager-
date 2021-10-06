@@ -16219,9 +16219,6 @@ footer .footer-brand:focus {
 }
 
 
-footer .copyright {
-  margin-right: 100px;
-}
 
 footer .copyright .material-icons {
   font-size: 18px;

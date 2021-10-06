@@ -91,3 +91,15 @@
     background-color: #fffa90;
     width: 350px;
 }
+@media only screen and (max-width: 1300px){
+    .btn-lista{
+        margin-top: 30px;
+        margin-left: 31%;
+        width: 335px;
+    }
+    #top > div.col-sm-5.btn-lista{
+        margin-top: 30px;
+        margin-left: 27%;
+        width: 357px;
+    }
+}

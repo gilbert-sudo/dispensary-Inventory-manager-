@@ -48,6 +48,7 @@ function itemIsSet(params) {
 function resetinput() {
     
     search.value = '';
+    type.value = '';
     codeinterne.value = '';
     codeinterne2.value = '';
     type2.value = '';
@@ -221,7 +222,8 @@ function ajouter() {
 //end Ajouter au panier
 
 //selection du produit
-function select(select, code, prix, quantidade) {
+function select(select, code, prix, quantidade, principio) {
+    type.value = principio;
     search.value = select;
     search2.value = select;
     codeinterne.value = quantidade;
@@ -252,6 +254,7 @@ const searchStates = async searchText => {
 
     if (searchText.length === 0) {
         matches = [];
+        type.value = '';
         codeinterne.value = '';
         codeinterne2.value = '';
         type2.value = '';
@@ -273,7 +276,7 @@ const outputHTML = matches => {
    
     if (matches.length > 0) {
         const html = matches.map(match => `
-        <div id="sugg" class="card card-body mt-2 mb-1" onclick="select('${match.descricao}', '${match.codInterno}', '${match.venda}', '${match.quantidade}');">
+        <div id="sugg" class="card card-body mt-2 mb-1" onclick="select('${match.descricao}', '${match.codInterno}', '${match.venda}', '${match.quantidade}', '${match.principio}');">
         <h6>${match.descricao} (${match.codInterno}) <span class="text-primary"><bold>${match.venda} Ar</bold></span></h6>
         </div>
         `).join('');

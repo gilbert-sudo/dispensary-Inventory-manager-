@@ -23,7 +23,7 @@ if(isset($_GET['id'])){
 
 
 
-  <h3 class="page-header">Client<?php echo $cliente['id']?></h3>
+  <h3 class="page-header">Client n°<?php echo $cliente['id']?></h3>
 
 <div class="row">
     <div class="col-md-4">

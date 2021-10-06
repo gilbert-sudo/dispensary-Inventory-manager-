@@ -22,6 +22,7 @@ function createRandomPassword()
 $finalcode = createRandomPassword();
 
 if (isset($_POST['facturer'])) {
+    
     $codeitems = [];
     $qttitems = [];
     $arrayCount = 0;

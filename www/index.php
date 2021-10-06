@@ -70,13 +70,11 @@ if (isset($_POST['acao'])) {
         while ($row = $result->fetch(SQLITE3_ASSOC)) {
             ++$numRows;
         }
-        $info = $result->fetch(SQLITE3_ASSOC);
+        
         if ($numRows == 1) {
-            $_SESSION['id2'] = $info['id2'];
-            $_SESSION['usuario2'] = $usuario;
-            $_SESSION['senha2'] = $senha;
-            $_SESSION['nome2'] = $info['nome2'];
-            header("Location:caisse/index.php?pg=main");
+        $_SESSION['usuario'] = $usuario;
+        $_SESSION['senha'] = $senha;
+        header("Location:caisse/index.php?pg=main");
         } elseif (!empty($_POST['usuario']) and !empty($_POST['senha']) and $_POST['fonction'] == "Caisse") {
             $usuario = $_POST['usuario'];
             $senha = $_POST['senha'];
@@ -90,12 +88,9 @@ if (isset($_POST['acao'])) {
             while ($row = $result->fetch(SQLITE3_ASSOC)) {
                 ++$numRows;
             }
-            $info = $result->fetch(SQLITE3_ASSOC);
             if ($numRows == 1) {
-                $_SESSION['id'] = $info['id'];
                 $_SESSION['usuario'] = $usuario;
                 $_SESSION['senha'] = $senha;
-                $_SESSION['nome'] = $info['nome'];
                 header("Location:caisse/index.php?pg=main");
             } else {
                 //erreur

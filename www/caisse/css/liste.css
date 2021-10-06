@@ -208,15 +208,27 @@ input{
     margin-top: 40px;
     margin-bottom: 0px;
     margin-right: 16px;
-    padding-right: 50px;
+    padding-right: 33px;
     padding-left: 68px;
-    width: 700px;
+    width: 945px;
 }
-.colonne4 li{
+.code, .stock{
     list-style: none;
     padding-bottom: 2.5px;
     padding-top: 2.5px;
-    padding-left: 25px;
+    padding-left: 4px;
+}
+.nm{
+    padding-left: 163px;
+    list-style: none;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
+}
+.prix{
+    padding-left: 388px;
+    list-style: none;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
 }
 .colonne4 li a{
     text-decoration: none;
@@ -231,7 +243,7 @@ input{
     margin-bottom: 0px;
     padding: 0px;
     justify-content: space-between;
-    width: 700px;
+    width: 945px;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 20px;
@@ -247,15 +259,26 @@ ul.colonne5 > li:nth-child(4){
     color: #646464;
     font-size: 20px;
 }
-.colonne5 > li > input{
+.c1, .c3, .c4{
     background: #f2f2f2;
     border: none;
-    margin-right: 40px;
+    margin-right: 22px;
     margin-bottom: 0px;
     margin-left: 6px;
     margin-top: 0px;
-    width: 100px;
-    text-align: center;
+    width: 50px;
+}
+.c2{
+    background: #f2f2f2;
+    border: none;
+    margin-right: 22px;
+    margin-bottom: 0px;
+    margin-left: 6px;
+    margin-top: 0px;
+    width: 535px;   
+}
+.id{
+    margin-right: 5px;
 }
 .colonne5 > li:nth-child(6){
     border: none;
@@ -333,5 +356,51 @@ button{
     justify-content: space-between;
     margin-left: 390px;
     margin-right: 84px;
+}
+.c2{
+    background: #f2f2f2;
+    border: none;
+    margin-right: 22px;
+    margin-bottom: 0px;
+    margin-left: 6px;
+    margin-top: 0px;
+    width: 442px;   
+}
+.nm{
+    padding-left: 163px;
+    list-style: none;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
+}
+.prix{
+    padding-left: 290px;
+    list-style: none;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
+}
+.colonne5{
+    background: #f2f2f2;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    justify-content: space-between;
+    width: 836px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+}
+.colonne4{
+    background: #cccccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 0px;
+    margin-right: 16px;
+    padding-right: 33px;
+    padding-left: 68px;
+    width: 836px;
 }
 }

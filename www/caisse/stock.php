@@ -17,6 +17,28 @@ $items = $result->fetchAll();
   <link rel="stylesheet" type="text/css" href="css/liste.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <title>Logiciel vente</title>
+  <style>
+       /* ==============================
+         CAISSE LOGGOUT BUTTON
+    =============================== */
+    .loggout {
+      position: absolute;
+      right: 5%;
+      top: 0%;
+      border: 2px solid #00a99d;
+      background-color: white;
+    }
+
+    .loggout>a {
+      color: #00a99d;
+      text-decoration: none;
+    }
+
+    .loggout>a:hover {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,43 +52,48 @@ $items = $result->fetchAll();
       </ul>
     </div>
     <div id="Block2" class="col-md-10">
-      <div class="bar">
-        <p class="text">DISPANSAIRE ANGLICAN</p>
+      <div class="bar" align="center">
+        <table>
+          <td>
+            <p class="text">DISPANSAIRE ANGLICAN</p>
+          </td>
+          <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
+        </table>
       </div>
       <div class="title">
-        <p class="titre"><span class="caisse">S</span>TOCK</p>
+        <p class="titre" style="width: 200px;"><span class="caisse">📦</span>Stock</p>
       </div>
       <div class="other" align="center">
         <ul class="colonne4">
-          <li><a>code</a></li>
-          <li><a>nom</a></li>
-          <li><a>prix</a></li>
-          <li><a>en stock</a></li>
+          <li class="code"><a>code</a></li>
+          <li class="nm"><a>nom</a></li>
+          <li class="prix"><a>prix</a></li>
+          <li class="stock"><a>en stock</a></li>
         </ul>
         <div class="liste" style="overflow-y: scroll; max-height: 280px;">
-          <?php 
+          <?php
           $count = 0;
-          foreach ($items as $value) : 
+          foreach ($items as $value) :
             $count++;
-            if ($count<10) {
-              $count = '0'.$count;
-            }else{
+            if ($count < 10) {
+              $count = '0' . $count;
+            } else {
               $count = $count;
             }
-            ?>
+          ?>
             <ul class="colonne5">
-              <li><a><?=$count?></a></li>
-              <li><input type="text" name="cd" value="<?= $value['codInterno'] ?>" placeholder="aucun"></li>
-              <li><input type="text" name="name" value="<?= $value['descricao'] ?>" placeholder="aucun"></li>
-              <li><input type="text" name="pu" value="<?= $value['venda'] ?>" placeholder="0 Ar"></li>
-              <li><input type="text" name="qt" value="<?= $value['quantidade'] ?>" placeholder="00"></li>
+              <li class="id"><a><?= $count ?></a></li>
+              <li><input class="c1" type="text" name="cd" <?= ($value['quantidade'] == 0 ? 'style="color:red"' : ''); ?> value="<?= $value['codInterno'] ?>" placeholder="aucun" disabled></li>
+              <li><input class="c2" type="text" name="name" <?= ($value['quantidade'] == 0 ? 'style="color:red"' : ''); ?> value="<?= $value['descricao'] ?>" placeholder="aucun" disabled></li>
+              <li><input class="c3" type="text" name="pu" <?= ($value['quantidade'] == 0 ? 'style="color:red"' : ''); ?> value="<?= $value['venda'] ?>" placeholder="0 Ar" disabled></li>
+              <li><input class="c4" type="text" name="qt" <?= ($value['quantidade'] == 0 ? 'style="color:red"' : ''); ?> value="<?= $value['quantidade'] ?>" placeholder="00" disabled></li>
             </ul>
           <?php endforeach; ?>
         </div>
       </div>
       <div class="bouton2">
         <button>Recherche</button>
-        <button><a href="#">Liste</a></button>
+        <button style="width: 240px;"><a href="#">Annuler une vente</a></button>
       </div>
     </div>
   </content>
