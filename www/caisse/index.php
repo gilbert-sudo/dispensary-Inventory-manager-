@@ -150,7 +150,7 @@ if (isset($_GET['item'])) {
             </div>
             <div class="bouton2">
               <button type="submit" name="facturer" style="width: 140px;">📠 Encaisser</button>
-              <button><a href="sales.php" style="text-decoration:none; color:black;">🛒 Ventes</a></button>
+              <button><a href="../sales.php" style="text-decoration:none; color:black;">🛒 Ventes</a></button>
               <button><a href="user.php" style="text-decoration:none; color:black;">➕ Clients</a></button>
             </div>
           </form>

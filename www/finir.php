@@ -59,12 +59,14 @@ if (isset($_POST['facturer'])) {
         $sql2->execute();
         //END update quant in the inventory
         $valeur = $pro['venda'];
-        $sql = $db->prepare("INSERT INTO tb_produit_vendu (numero, codebare, nom, quant, valeur) VALUES (:numero, :codebare, :nom, :quant, :valeur)");
+        $date = date("m/d/y");
+        $sql = $db->prepare("INSERT INTO tb_produit_vendu (numero, codebare, nom, quant, valeur, date) VALUES (:numero, :codebare, :nom, :quant, :valeur, :date)");
         $sql->bindValue(':numero', $numero);
         $sql->bindValue(':codebare', $codebare);
         $sql->bindValue(':nom', $nom);
         $sql->bindValue(':quant', $quant);
         $sql->bindValue(':valeur', $valeur);
+        $sql->bindValue(':date', $date);
         $sql->execute();
 
         //calcule total prix

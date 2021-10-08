@@ -4,13 +4,14 @@ $valor = $_GET['total'];
 
 if (isset($_GET['finaliser'])) {
     $data = date("d/m/y");
+    $dbdate = date("m/d/y");
     $vendedor = $_SESSION['usuario'];
     $cliente = $_GET['client'];
 
     $mode = $_GET['mode'];
 
     $sql = $db->prepare("INSERT INTO `tb_ventes` VALUES (null,?,?,?,?,?,?)");
-    $sql->execute(array($valor, $data, $vendedor, $cliente, $n_NotaFiscal, $mode));
+    $sql->execute(array($valor, $dbdate, $vendedor, $cliente, $n_NotaFiscal, $mode));
 
     if ($cliente == 'Non identifié') {
 

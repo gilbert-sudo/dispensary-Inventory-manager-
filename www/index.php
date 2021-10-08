@@ -70,11 +70,11 @@ if (isset($_POST['acao'])) {
         while ($row = $result->fetch(SQLITE3_ASSOC)) {
             ++$numRows;
         }
-        
+
         if ($numRows == 1) {
-        $_SESSION['usuario'] = $usuario;
-        $_SESSION['senha'] = $senha;
-        header("Location:caisse/index.php?pg=main");
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION['senha'] = $senha;
+            header("Location:caisse/index.php?pg=main");
         } elseif (!empty($_POST['usuario']) and !empty($_POST['senha']) and $_POST['fonction'] == "Caisse") {
             $usuario = $_POST['usuario'];
             $senha = $_POST['senha'];
@@ -118,7 +118,32 @@ if (isset($_POST['acao'])) {
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link href="css/material-kit.css?v=2.0.5" rel="stylesheet" />
+    <style>
+        .form-control {
+            margin-top: 10px;
+        }
 
+        .card-title {
+            width: 180px;
+        }
+
+        .logo {
+            z-index: 3000;
+            position: absolute;
+            margin-top: -50px;
+            margin-left: 140px;
+        }
+
+        .card-login {
+            border-radius: 50px;
+            border: 3px solid;
+        }
+        #fleche-select{
+            z-index: 10000;
+            position: absolute;
+        }
+       
+    </style>
 </head>
 
 <body class="login-page sidebar-collapse">
@@ -131,26 +156,28 @@ if (isset($_POST['acao'])) {
     <div class="page-header header-filter" style="background-image: url('img/far.png'); background-size: cover; background-position: top center;">
         <div class="container" align="center">
 
-            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-                <div class="card card-login">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto" style="max-width: 500px">
+                <div class="logo text-center">
+
+                    <img src="img.png" class="card-title">
+                    <!-- <h4 class="card-title" style="color: #ffffff;"> Connexion</h4> -->
+                </div>
+                <div class="card card-login" style="height:450px; padding: 150px 50px 50px 50px; width: 360px;">
 
                     <form class="form" method="post" action="#">
-                        <div class="card-header text-center" style="background-color: #00a99d;">
 
-                            <h4 class="card-title" style="color: #ffffff;"> Connexion</h4>
-                        </div>
                         <div class="card-body">
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="material-icons"></i>
+                                        <h4 class="material-icons">🎫</h4>
                                     </span>
                                 </div>
-                                <label>
+                                <label style="width: 170px;">
                                     <select class="form-control" name="fonction">
-                                        <option>Admin</option>
-                                        <option>Caisse</option>
+                                        <option value="Caisse">Caisse </option>
+                                        <option value="Admin">Admin </option>
                                     </select>
                                 </label>
                             </div>
@@ -158,7 +185,7 @@ if (isset($_POST['acao'])) {
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="material-icons"></i>
+                                        <i class="material-icons">👨‍💼</i>
                                     </span>
                                 </div>
                                 <label>
@@ -168,14 +195,14 @@ if (isset($_POST['acao'])) {
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="material-icons"></i>
+                                        <i class="material-icons"> 🔑</i>
                                     </span>
                                 </div>
                                 <label>
                                     <input type="password" class="form-control" placeholder="Tapez le mot de passe" name="senha">
                                 </label>
                             </div>
-                            <button type="submit" name="acao" class="btn" style=" background-color: #10978e;"> se connecter</button>
+                            <button type="submit" name="acao" class="btn" style=" background-color: #10978e; border: 2px solid black;border-radius: 1rem;"> se connecter</button>
                         </div>
                     </form>
                 </div>
@@ -185,7 +212,7 @@ if (isset($_POST['acao'])) {
             <div class="container">
 
                 <div class="copyright " align="center">
-                    &copy; GILBERT SOFTWARE
+                    &copy; GILBERT Madagascar
                 </div>
             </div>
         </footer>

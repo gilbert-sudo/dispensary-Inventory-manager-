@@ -2,9 +2,9 @@
 
 include ('classes/Mysql.php');
 if (isset( $_GET['deletar'] )) {
-    $id = (int)$_GET['deletar'];
+    $id2 = (int)$_GET['deletar'];
 
-    $db->exec( "DELETE FROM `tb_usuarios` WHERE id = $id2" );
+    $db->exec( "DELETE FROM `tb_caisse` WHERE id2 = $id2" );
 }
 if(isset($_POST['acao'])){
                 $id = $_GET['id'];
@@ -74,7 +74,7 @@ if(isset($_POST['acao'])){
                     <td><?php echo $value['cargo2']?></td>
                     <td><?php echo $value['usuario2']?></td>
                     <td class="actions">
-                        <a class="btn btn-success btn-xs" href="?pg=visualizar-caissa&id=<?php echo $value['id2']?>">Regarder</a>
+                        <a class="btn btn-success btn-xs" href="?pg=visualizar-caisse&id=<?php echo $value['id2']?>">Regarder</a>
                         <a class="btn btn-warning btn-xs"
                            href="?pg=editar-caisse&id=<?php echo $value['id2'] ?> ">Éditer</a>
                         <a onclick="return window.confirm('Voulez-vous vraiment supprimer cet employé(e) ?');" class="btn btn-danger btn-xs" href= "?pg=caisse&deletar=<?php echo $value['id2']; ?>">Effacer</a>

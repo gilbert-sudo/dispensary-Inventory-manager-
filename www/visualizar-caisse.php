@@ -46,7 +46,7 @@ $id=$_GET['id'];
  <hr />
  <div id="actions" class="row">
    <div class="col-md-12">
-     <a href="?pg=usuario" class="btn btn-primary">Fechar</a>
+     <a href="?pg=caisse" class="btn btn-primary">Fechar</a>
 	 <a href="?pg=editar-caisse&id=<?php echo $usuario['id2']?>" class="btn btn-dark">Editar</a>
    </div>
  </div>
