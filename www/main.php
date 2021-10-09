@@ -3,7 +3,6 @@ session_start();
 include('classes/Sistema.php');
 ?>
 <?php
-
 function createRandomPassword()
 {
     $chars = "003232303232023232023456789";
@@ -73,7 +72,7 @@ $finalcode = createRandomPassword();
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <img src="img/farmacia-logo.png" alt="logo" width="60px">
-                    <p>Pharmacie GILBERT</p>
+                    <p>Dispensaire SAHASOA</p>
                 </div>
 
                 <ul class="nav">
@@ -83,6 +82,16 @@ $finalcode = createRandomPassword();
                         <a href="main.php">
                             <i class="pe-7s-home"></i>
                             <p>Page d'accueil</p>
+                        </a>
+                    </li>
+                    <li <?php if (isset($_GET['pg'])) {
+                            if ($_GET['pg'] == "profil" || $_GET['pg'] == "edit-profil") {
+                                print 'class="active"';
+                            }
+                        } ?>>
+                        <a href="?pg=profil">
+                            <i class="pe-7s-user"></i>
+                            <p>Profil</p>
                         </a>
                     </li>
                     <li <?php if (isset($_GET['pg'])) {
@@ -212,7 +221,7 @@ $finalcode = createRandomPassword();
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        GILBERT SOFTWARE
+                        GILBERT Madagascar ©
                     </p>
                 </div>
             </footer>

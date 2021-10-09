@@ -8,8 +8,9 @@ $numRows1 = 0;
 $code = $_POST['clientNum'];
 $numero = $_POST['clientNum'];
 $nome = $_POST['clientName'];
-$telefone = $_POST['clientPhone'];
-$email = $_POST['clientMail'];
+$bairro = $_POST['clientMail'];
+$dataNascimento = $_POST['clientPhone'];
+
 $sql = "SELECT * FROM tb_clientes where numero = :code";
 $result = $db->prepare($sql);
 $result->bindValue(':code', $code);
@@ -25,10 +26,10 @@ if ($numRows1 == 1) {
     if (isset($_POST['enregistrer'])) {
         
         $cpf = 'non définie';
-        $dataNascimento = 'non définie';
         $endereco = 'non définie';
-        $bairro = 'non définie';
+        $telefone = 'non définie';
         $celular = 'non définie';
+        $email = 'non définie';
         
         $sql = $db->prepare("INSERT INTO tb_clientes (cpf ,nome ,dataNascimento ,endereco ,numero ,bairro ,telefone ,celular ,email) VALUES (:cpf ,:nome ,:dataNascimento ,:endereco ,:numero ,:bairro ,:telefone ,:celular ,:email)");
         $sql->bindValue(':cpf', $cpf);

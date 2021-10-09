@@ -95,7 +95,7 @@ include('../classes/Sistema.php');
       <div class="bar" align="center">
          <table>
           <td>
-            <p class="text">DISPANSAIRE ANGLICAN</p>
+            <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
           <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
         </table>
@@ -123,18 +123,18 @@ include('../classes/Sistema.php');
                                                       }; ?> required>
                 </div>
                 <div class="row rtwo">
-                  <input type="number" name="clientPhone" <?php if (isset($_GET['tel']) & !empty($_GET['tel'])) {
+                  <input type="date" name="clientPhone" <?php if (isset($_GET['tel']) & !empty($_GET['tel'])) {
                                                             echo "value=" . $_GET['tel'];
                                                           } else {
-                                                            echo "placeholder='Entrer un numéro de télephone'";
+                                                            echo "placeholder='Entrer une date'";
                                                           }; ?>>
                 </div>
                 <div class="row rthree">
                   <input type="text" name="clientMail" <?php if (isset($_GET['email']) & !empty($_GET['email'])) {
                                                           echo "value=" . $_GET['email'];
                                                         } else {
-                                                          echo "placeholder='Entrer une adresse email'";
-                                                        }; ?> style="margin-bottom: 30px;">
+                                                          echo "placeholder='Entrer une adresse (obligatoire)'";
+                                                        }; ?> style="margin-bottom: 30px;" required>
                   <button type="submit" name="enregistrer" class="btn btn-primary mt-3" style="margin-left: 20px;"><span>Enregister</span></button>
                   <button class="btn btn-danger mt-3"><a href="index.php" style="text-decoration:none; color:white;">Annuler</a> </button>
                 </div>

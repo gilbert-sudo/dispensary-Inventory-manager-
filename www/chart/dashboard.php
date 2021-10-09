@@ -28,6 +28,10 @@ foreach ($resul as $res) {
 }
 $label = json_encode($mois);
 $series1 = json_encode($benefice);
+
+$sql= $db->prepare("SELECT * FROM `tb_profil`");
+$sql->execute();
+$profil = $sql->fetch();
 ?>
 <!-- end fetch data from rapport table -->
 
@@ -64,7 +68,7 @@ $series1 = json_encode($benefice);
             <div class="sidebar-wrapper"  style="overflow: hidden;">
                 <div class="logo">
                     <img src="../img/farmacia-logo.png" alt="logo" width="60px">
-                    <p>Pharmacie GILBERT</p>
+                    <p><?php echo $profil['name'];?></p>
                 </div>
 
                 <ul class="nav">
@@ -72,6 +76,12 @@ $series1 = json_encode($benefice);
                         <a class="nav-link" href="../main.php">
                             <i class="pe-7s-home"></i>
                             <p>Page d'accueil</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../main.php?pg=profil" class="nav-link">
+                            <i class="pe-7s-user"></i>
+                            <p>Profil</p>
                         </a>
                     </li>
                     <li>

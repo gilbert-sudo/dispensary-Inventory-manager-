@@ -1,13 +1,31 @@
 <?php
 
-include ('classes/Mysql.php');
-if (isset( $_GET['deletar'] )) {
+include('classes/Mysql.php');
+if (isset($_GET['deletar'])) {
     $id = (int)$_GET['deletar'];
 
-    $db->exec( "DELETE FROM `tb_usuarios` WHERE id = $id" );
+    $db->exec("DELETE FROM `tb_usuarios` WHERE id = $id");
 }
 
+if (isset($_POST['enregistrer'])) {
+    $id = $_GET['id'];
+    $nome = $_POST['nome'];
+    $cargo = $_POST['cargo'];
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
 
+
+    //  $sql = MySql::conectar()->prepare("INSERT INTO `tb_usuarios`  VALUES (null,?,?,?,?)");
+    // $ql->execute(array($nome,$cargo,$usuario,$senha));
+    $sql = ("UPDATE tb_usuarios SET nome = :nome, cargo = :cargo, usuario = :usuario, senha = :senha WHERE id = :id");
+    $sql = $db->prepare($sql);
+    $sql->bindValue(':nome', $nome);
+    $sql->bindValue(':cargo', $cargo);
+    $sql->bindValue(':usuario', $usuario);
+    $sql->bindValue(':senha', $senha);
+    $sql->bindValue(':id', $id);
+    $sql->execute();
+}
 ?>
 
 <div class="lista-cliente">
@@ -26,7 +44,7 @@ if (isset( $_GET['deletar'] )) {
     </div>
 
 
-    <hr/>
+    <hr />
     <div id="list" class="row">
 
         <div class="table-responsive col-md-12">
@@ -36,46 +54,45 @@ if (isset( $_GET['deletar'] )) {
 
                 $sql = $db->prepare("SELECT * FROM `tb_usuarios`");
                 $sql->execute();
-                $usuarios= $sql->fetchAll();
-?>
-               
+                $usuarios = $sql->fetchAll();
+                ?>
+
 
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Bureau</th>
-                    <th>Utilisateur</th>
-                    <th class="actions">Actions</th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Bureau</th>
+                        <th>Utilisateur</th>
+                        <th class="actions">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-					<?php foreach ($usuarios as $value) : ?>
-                    <td><?php echo $value['id']?></td>
-                    <td><?php echo $value['nome']?></td>
-                    <td><?php echo $value['cargo']?></td>
-                    <td><?php echo $value['usuario']?></td>
-                    <td class="actions">
-                        <a class="btn btn-success btn-xs" href="?pg=visualizar-usuario&id=<?php echo $value['id']?>">Regarder</a>
-                        <a class="btn btn-warning btn-xs"
-                           href="?pg=editar-usuario&id=<?php echo $value['id'] ?> ">Éditer</a>
-                        <a onclick="return window.confirm('Voulez-vous vraiment supprimer cet Utilisateur ?');" class="btn btn-danger btn-xs" href= "?pg=usuario&deletar=<?php echo $value['id']; ?>">Effacer</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <?php foreach ($usuarios as $value) : ?>
+                            <td><?php echo $value['id'] ?></td>
+                            <td><?php echo $value['nome'] ?></td>
+                            <td><?php echo $value['cargo'] ?></td>
+                            <td><?php echo $value['usuario'] ?></td>
+                            <td class="actions">
+                                <a class="btn btn-success btn-xs" href="?pg=visualizar-usuario&id=<?php echo $value['id'] ?>">Regarder</a>
+                                <a class="btn btn-warning btn-xs" href="?pg=editar-usuario&id=<?php echo $value['id'] ?> ">Éditer</a>
+                                <a onclick="return window.confirm('Voulez-vous vraiment supprimer cet Utilisateur ?');" class="btn btn-danger btn-xs" href="?pg=usuario&deletar=<?php echo $value['id']; ?>">Effacer</a>
+                            </td>
+                    </tr>
 
                 <?php endforeach; ?>
                 </tbody>
             </table>
             <div id="bottom" class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="disabled"><a>&lt; Précédent</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#" rel="next">Suivant &gt;</a></li>
-            </ul><!-- /.pagination -->
+                <div class="col-md-12">
+                    <ul class="pagination">
+                        <li class="disabled"><a>&lt; Précédent</a></li>
+                        <li class="disabled"><a>1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li class="next"><a href="#" rel="next">Suivant &gt;</a></li>
+                    </ul><!-- /.pagination -->
+                </div>
+            </div> <!-- /#bottom -->
         </div>
-    </div> <!-- /#bottom -->
-</div>

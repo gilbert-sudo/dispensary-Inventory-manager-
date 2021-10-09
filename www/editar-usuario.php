@@ -12,29 +12,10 @@ $usuario= $sql->fetch();
 
 
 
-
-
 <div class="adicionar-usuario">
     <h3 class="page-header">Edition</h3>
     <fieldset>
-        <form class="form-cliente" method="post" enctype="multipart/form-data">
-
-
-            <?php //
-            if(isset($_POST['acao'])){
-                $nome=$_POST['nome'];
-                $cargo=$_POST['cargo'];
-                $usuario=$_POST['usuario'];
-                $senha=$_POST['senha'];
-
-                //  $sql = MySql::conectar()->prepare("INSERT INTO `tb_usuarios`  VALUES (null,?,?,?,?)");
-                // $ql->execute(array($nome,$cargo,$usuario,$senha));
-
-
-            }
-            ?>
-
-
+        <form class="form-cliente" method="post" enctype="multipart/form-data" action="?pg=usuario&id=<?=$id?>">
 
             <div class="form-usuario">
                 <div class="row">
@@ -63,7 +44,7 @@ $usuario= $sql->fetch();
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="exampleInputEmail1">Mot de passe</label>
-                        <input type="password"  required type= "password" class="form-control" name="senha" placeholder="Digite a Senha" value="<?php echo $usuario['nome'];?>">
+                        <input type="text"  required type= "password" class="form-control" name="senha" placeholder="Digite a Senha" value="<?php echo $usuario['senha'];?>">
                     </div>
 
                 </div>
@@ -75,7 +56,7 @@ $usuario= $sql->fetch();
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary" name="enregistrer">Sauvegarder</button>
                     <a href="?pg=usuario" class="btn btn-default">Annuler</a>
                 </div>
             </div>

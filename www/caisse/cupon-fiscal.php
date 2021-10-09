@@ -2,6 +2,10 @@
 $n_NotaFiscal = $_GET['numero'];
 $valor = $_GET['total'];
 
+$sql= $db->prepare("SELECT * FROM `tb_profil`");
+$sql->execute();
+$profil= $sql->fetch();
+
 if (isset($_GET['finaliser'])) {
     $data = date("d/m/y");
     $dbdate = date("m/d/y");
@@ -57,18 +61,18 @@ if (isset($_GET['finaliser'])) {
                     <head>
                     </head>
                     <div class="pdf" style="padding-bottom: 50px;">
-                        <h1 style="padding-top: 20;"><img src="../img/farmacia-logo.ico" height="50px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GILBERT</h1>
+                        <h1 style="padding-top: 20;"><img src="../img/farmacia-logo.ico" height="50px">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $profil['name'];?></h1>
                         <table style="width: 80%;">
                             <tr>
-                                <th style="text-align: start;">CNPJ: 23563245/100-04</th>
-                                <th style="text-align: end;">IE:15000/015</th>
+                                <th style="text-align: start;">CNPJ: <?php echo $profil['cnpj'];?></th>
+                                <th style="text-align: end;">IE: <?php echo $profil['ie'];?></th>
                             </tr>
                             <tr>
-                                <th style="text-align: start;">Villa de Gauche 432</th>
-                                <th style="text-align: end;">Tsimbazaza n°4</th>
+                                <th style="text-align: start;"><?php echo $profil['Adresse'];?></th>
+                                <th style="text-align: end;"><?php echo date('d/m/y');?></th>
                             </tr>
                             <tr>
-                                <th style="text-align: start;">Téléphone: 0345511234</th>
+                                <th style="text-align: start;">Téléphone: <?php echo $profil['telephone'];?></th>
                             </tr>
                         </table>
                         <th><strong style="display: flex;">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </strong></th>

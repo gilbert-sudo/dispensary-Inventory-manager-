@@ -20,22 +20,22 @@ $id=$_GET['id'];
 <div class="visualizar-caisse">
 <div class="row">
     <div class="col-md-3">
-      <p><strong>Nome</strong></p>
+      <p><strong>Nom</strong></p>
   	  <p><?php echo $usuario['nome2'];?></p>
     </div>
 
 	<div class="col-md-3">
-      <p><strong>Cargo</strong></p>
+      <p><strong>Fonction</strong></p>
   	  <p><?php echo $usuario['cargo2'];?></p>
     </div>
 
 	<div class="col-md-3">
-      <p><strong>Usuario</strong></p>
+      <p><strong>Nom d'Utilisateur</strong></p>
   	  <p><?php echo $usuario['usuario2'];?></p>
     </div>
 
     <div class="col-md-3">
-      <p><strong>Senha</strong></p>
+      <p><strong>Mots de passe</strong></p>
   	  <p><?php echo $usuario['senha2'];?></p>
     </div>
 
@@ -46,8 +46,8 @@ $id=$_GET['id'];
  <hr />
  <div id="actions" class="row">
    <div class="col-md-12">
-     <a href="?pg=caisse" class="btn btn-primary">Fechar</a>
-	 <a href="?pg=editar-caisse&id=<?php echo $usuario['id2']?>" class="btn btn-dark">Editar</a>
+     <a href="?pg=caisse" class="btn btn-primary">Fermer</a>
+	 <a href="?pg=editar-caisse&id=<?php echo $usuario['id2']?>" class="btn btn-dark">Editer</a>
    </div>
  </div>
 

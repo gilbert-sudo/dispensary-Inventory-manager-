@@ -144,15 +144,7 @@ include('classes/Mysql.php');
                         $andranas = array_column($andranas, 'date');
                         $andranas = $andranas[78];
                         $andranas = strtotime($andranas);
-                        if ($date > $andranas) {
-                            $valiny = 'eny tompoko';
-                        }elseif ($date < $andranas){
-                            $valiny = 'tsy tompoko';
-                        }
-                        else {
-                            $valiny = "mitovy";
-                        }
-
+                        
                         $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` LIMIT $begin,$itemsPerPage");
                         $sql->execute();
                         $produtos = $sql->fetchAll();

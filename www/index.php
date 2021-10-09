@@ -212,7 +212,7 @@ if (isset($_POST['acao'])) {
             <div class="container">
 
                 <div class="copyright " align="center">
-                    &copy; GILBERT Madagascar
+                    &copy; GILBERT Madagascar 
                 </div>
             </div>
         </footer>

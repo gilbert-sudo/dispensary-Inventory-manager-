@@ -97,7 +97,7 @@ $produtos = $sql->fetchAll();
                             <td><?php echo $value['quantidade'] ?></td>
                             <td class="actions">
                                 <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
-                                <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> ">'Editer</a>
+                                <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> ">Editer</a>
                                 <a onclick="return window.confirm('Voulez-vous vraiment supprimer ce produit ?');" class="btn btn-danger btn-xs" href="?pg=produtos&deletar=<?php echo $value['id']; ?>">Effacer</a>
                             </td>
                     </tr>

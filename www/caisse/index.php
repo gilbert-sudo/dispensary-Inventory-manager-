@@ -82,7 +82,7 @@ if (isset($_GET['item'])) {
       <div class="bar" align="center">
         <table>
           <td>
-            <p class="text">DISPANSAIRE ANGLICAN</p>
+            <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
           <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
         </table>
