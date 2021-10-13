@@ -1,6 +1,8 @@
 <?php
 $n_NotaFiscal = $_GET['numero'];
 $valor = $_GET['total'];
+$month = date('m');
+$year = date('y');
 
 $sql= $db->prepare("SELECT * FROM `tb_profil`");
 $sql->execute();
@@ -14,8 +16,14 @@ if (isset($_GET['finaliser'])) {
 
     $mode = $_GET['mode'];
 
-    $sql = $db->prepare("INSERT INTO `tb_ventes` VALUES (null,?,?,?,?,?,?)");
-    $sql->execute(array($valor, $dbdate, $vendedor, $cliente, $n_NotaFiscal, $mode));
+    $quer = $db->prepare("SELECT * FROM tb_produit_vendu where numero='$n_NotaFiscal'");
+    $quer->execute();
+    $pr = $quer->fetchAll();
+    $benefice = array_column($pr, 'benefice');
+    $benefice = array_sum($benefice);
+
+    $sql = $db->prepare("INSERT INTO `tb_ventes` VALUES (null,?,?,?,?,?,?,?,?,?,1)");
+    $sql->execute(array($valor, $dbdate, $vendedor, $cliente, $n_NotaFiscal, $mode, $month, $year, $benefice));
 
     if ($cliente == 'Non identifié') {
 
@@ -31,9 +39,7 @@ if (isset($_GET['finaliser'])) {
         $cliTelefone = $clientes['numero'];
     }
 
-    $quer = $db->prepare("SELECT * FROM tb_produit_vendu where numero='$n_NotaFiscal'");
-    $quer->execute();
-    $pr = $quer->fetchAll();
+   
 ?>
     <!DOCTYPE html>
     <html lang="en">

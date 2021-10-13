@@ -1,24 +1,76 @@
-<!-- 
-=========================================================
- Light Bootstrap Dashboard - v2.0.1
-=========================================================
-
- Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com)
- Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
-
- Coded by Creative Tim
-
-=========================================================
-
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
-
 <!-- fetch data from rapport table -->
 <?php
 require_once('../classes/connect.php');
 $db = connect('../pharmacie.db');
 
-$result = $db->prepare("SELECT * FROM tb_rapport");
+// ====================================REFRECH DATA===========================
+$fetch_benefice = $db->prepare("SELECT * FROM tb_ventes WHERE states = 1");
+$fetch_benefice->execute();
+$fetch_benefice = $fetch_benefice->fetchAll();
+if ($fetch_benefice != []) {
+    $benefice = array_sum(array_column($fetch_benefice, 'benefice'));
+    $an = implode(array_unique(array_column($fetch_benefice, 'an')));
+    $mois = implode(array_unique(array_column($fetch_benefice, 'mois')));
+
+    switch ($mois) {
+        case ('1'):
+            $mois = 'JAN';
+            break;
+        case ('2'):
+            $mois = 'FEV';
+            break;
+        case ('3'):
+            $mois = 'MAR';
+            break;
+        case ('4'):
+            $mois = 'AVR';
+            break;
+        case ('5'):
+            $mois = 'MAI';
+            break;
+        case ('6'):
+            $mois = 'JUI';
+            break;
+        case ('7'):
+            $mois = 'JUL';
+            break;
+        case ('8'):
+            $mois = 'AOU';
+            break;
+        case ('9'):
+            $mois = 'SEP';
+            break;
+        case ('10'):
+            $mois = 'OCT';
+            break;
+        case ('11'):
+            $mois = 'NOV';
+            break;
+        case ('12'):
+            $mois = 'DEC';
+            break;
+        default:
+            $mois = '...';
+            break;
+    }
+    $row_existe = $db->prepare("SELECT * FROM tb_rapport_finance WHERE mois = '$mois' AND an = '$an'");
+    $row_existe->execute();
+    $row_existe = $row_existe->fetch();
+    if ($row_existe === false) {
+        $insert_to_rapport = $db->prepare("INSERT INTO tb_rapport_finance VALUES (null,?,?,?)");
+        $insert_to_rapport->execute(array($benefice, $mois, $an));
+    } else {
+        $insert_to_rapport = $db->prepare("UPDATE tb_rapport_finance SET benefice = ? WHERE mois = '$mois' AND an = '$an'");
+        $benefice_new = $benefice + $row_existe['benefice'];
+        $insert_to_rapport->execute(array($benefice_new));
+    }
+    $update_states = $db->prepare("UPDATE tb_ventes SET states = 0 WHERE states = 1");
+    $update_states->execute();
+}
+
+// ====================================REFRECH DATA===========================
+$year = date('y');
+$result = $db->prepare("SELECT * FROM tb_rapport_finance WHERE an = $year");
 $result->execute();
 $resul = $result->fetchAll();
 
@@ -26,10 +78,18 @@ foreach ($resul as $res) {
     $benefice[] = $res['benefice'];
     $mois[] = $res['mois'];
 }
-$label = json_encode($mois);
-$series1 = json_encode($benefice);
+if (isset($mois) && isset($benefice)) {
+    $label = json_encode($mois);
+    $series1 = json_encode($benefice);
+} else {
+    $mois = [];
+    $benefice = [];
+    $label = json_encode($mois);
+    $series1 = json_encode($benefice);
+}
 
-$sql= $db->prepare("SELECT * FROM `tb_profil`");
+
+$sql = $db->prepare("SELECT * FROM `tb_profil`");
 $sql->execute();
 $profil = $sql->fetch();
 ?>
@@ -65,10 +125,10 @@ $profil = $sql->fetch();
 
         Tip 2: you can also add an image using data-image tag
     -->
-            <div class="sidebar-wrapper"  style="overflow: hidden;">
+            <div class="sidebar-wrapper" style="overflow: hidden;">
                 <div class="logo">
                     <img src="../img/farmacia-logo.png" alt="logo" width="60px">
-                    <p><?php echo $profil['name'];?></p>
+                    <p><?php echo $profil['name']; ?></p>
                 </div>
 
                 <ul class="nav">

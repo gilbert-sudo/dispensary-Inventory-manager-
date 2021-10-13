@@ -102,7 +102,7 @@ if (isset($_GET['item'])) {
               <label class="ens" style="font-size: 20px; margin-right:20px">En stock: </label>
               <input type="text" id="codeinterne" name="code" placeholder="Stock" style="width: 75px;" disabled>
             </div>
-            <input type="number" id="qty" name="qtt" placeholder="Quantité(s)">
+            <input type="number" id="qty" name="qtt" placeholder="Quantité(s)" min="1" oninput="validity.valid||(value='');">
           </div>
           <div class="other">
             <ul class="colonne4">

@@ -46,7 +46,7 @@
         "external_drag": true,
         "external_navigation": true,
         "reload_page_F5": true,
-        "devtools_F12": false,
+        "devtools_F12": true,
         "remote_debugging_port": 0,
         "command_line_switches": {},
         "enable_downloads": true,

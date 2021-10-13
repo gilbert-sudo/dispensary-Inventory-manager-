@@ -61,7 +61,7 @@ include('classes/Mysql.php');
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <img src="img/farmacia-logo.png" alt="logo" width="60px">
-                    <p>Pharmacie GILBERT</p>
+                    <p>Dispensaire SAHASOA</p>
                 </div>
 
                 <ul class="nav">
@@ -110,9 +110,11 @@ include('classes/Mysql.php');
                     <div class="row">
                         <?php
                         // pagination
+                        $date = date('m/d/y');
+
                         $numRows = 0;
                         $itemsPerPage = 50;
-                        $totalItemReq = $db->query('SELECT id FROM tb_produit_vendu');
+                        $totalItemReq = $db->query("SELECT id FROM tb_produit_vendu WHERE date = '$date'");
                         while ($row = $totalItemReq->fetch(SQLITE3_ASSOC)) {
                             ++$numRows;
                         }
@@ -127,7 +129,7 @@ include('classes/Mysql.php');
 
                         $begin = ($currentPage - 1) * $itemsPerPage;
                         //end pagination
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu`");
+                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
                         $sql->execute();
                         $totals = $sql->fetchAll();
                         $total = 0;
@@ -138,14 +140,12 @@ include('classes/Mysql.php');
                             $total2 = intval($totalQuant[$i]) * intval($totalPrice[$i]);
                             $total = $total + $total2;
                         }
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu`");
+                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
                         $sql->execute();
                         $andranas = $sql->fetchAll();
                         $andranas = array_column($andranas, 'date');
-                        $andranas = $andranas[78];
-                        $andranas = strtotime($andranas);
                         
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` LIMIT $begin,$itemsPerPage");
+                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' LIMIT $begin,$itemsPerPage");
                         $sql->execute();
                         $produtos = $sql->fetchAll();
                         ?>
@@ -154,10 +154,10 @@ include('classes/Mysql.php');
                         <div class="lista-cliente">
 
                             <div id="top" class="row">
-                                <div class="col-sm-5">
-                                    <h2>Produit vendu</h2>
+                                <div class="col-sm-7">
+                                    <h2>Ventes d'aujourd'hui</h2>
                                 </div>
-                               <a class="btn btn-primary" href="sales.php" style="margin-top: 35px; margin-left:36%;"><i class="fa fa-refresh"></i> Actualiser</a>
+                               <a class="btn btn-primary" href="sales.php" style="margin-top: 35px; margin-left:20%;"><i class="fa fa-refresh"></i> Actualiser</a>
                                 <table style="position: absolute; margin-left:20px;">
                                     <td><h4 id="total1">Total ventes:</h4> </td>
                                     <td><input type="text" name="total" value="<?=number_format($total, 2).' Ar';?>" disabled id="total"></td>
@@ -170,7 +170,7 @@ include('classes/Mysql.php');
                                     <table class="table table-striped" cellspacing="0" cellpadding="0">
                                         <thead>
                                             <tr>
-                                                <th>Code</th>
+                                                <th>ID</th>
                                                 <th>Description</th>
                                                 <th>Quantité</th>
                                                 <th>p.u</th>

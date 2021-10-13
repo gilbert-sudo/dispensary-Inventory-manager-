@@ -7,7 +7,7 @@ include('classes/Mysql.php');
     <form class="form-cliente" method="post" enctype="multipart/form-data" action="php/add-provider.php">
         <div class=" row">
         <div class="form-group col-md-4">
-            <label for="exampleInputEmail1">Nom</label>
+            <label for="exampleInputEmail1">Nom (Obligatoire)</label>
             <input type="text" type="text" required class="form-control" name="nome" placeholder="Entrez un nom">
         </div>
         <div class="form-group col-md-3">
