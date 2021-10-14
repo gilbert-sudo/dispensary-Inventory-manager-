@@ -52,7 +52,6 @@ $fornecedores= $sql->fetchAll();
                     <td><?php echo $value['cidade']?></td>
                     <td class="actions">
                         <a class="btn btn-success btn-xs" href="?pg=visualizar-fornecedor&id=<?php echo $value['id']; ?>">Regarder</a>
-                        <a class="btn btn-warning btn-xs" href="?pg=editar-fornecedor&id=<?php echo $value['id']; ?> ">Editer</a>
                         <a class="btn btn-danger btn-xs"  href="?pg=fornecedores&deletar=<?php echo $value['id']; ?>">Effacer</a>
                     </td>
                 </tr>

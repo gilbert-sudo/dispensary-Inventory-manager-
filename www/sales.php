@@ -113,7 +113,7 @@ include('classes/Mysql.php');
                         $date = date('m/d/y');
 
                         $numRows = 0;
-                        $itemsPerPage = 50;
+                        $itemsPerPage = 30;
                         $totalItemReq = $db->query("SELECT id FROM tb_produit_vendu WHERE date = '$date'");
                         while ($row = $totalItemReq->fetch(SQLITE3_ASSOC)) {
                             ++$numRows;
@@ -203,7 +203,7 @@ include('classes/Mysql.php');
                                         <ul class="pagination">
                                             <?php if ($currentPage != 1) {
                                                 $prev = $currentPage - 1;
-                                                echo '<li class="prev"><a href="?pg=produtos&page=' . ($prev) . '" rel="next">&lt; Précedant</a></li>';
+                                                echo '<li class="prev"><a href="?pg=sales&page=' . ($prev) . '" rel="next">&lt; Précedant</a></li>';
                                             } else {
                                                 echo '<li><a href="#">&lt; Précedant</a></li>';
                                             }
@@ -212,11 +212,11 @@ include('classes/Mysql.php');
                                                 if ($i == $currentPage) {
                                                     echo '<li><a  style="background-color: #75aca8; color:white;" href="#">' . $i . '</a></li>';
                                                 } else {
-                                                    echo '<li><a href="?pg=produtos&page=' . $i . '">' . $i . '</a></li>';
+                                                    echo '<li><a href="?pg=sales&page=' . $i . '">' . $i . '</a></li>';
                                                 }
                                             } ?>
                                             <?php if ($currentPage < ($totalPages - 1)) {
-                                                echo '<li class="next"><a href="?pg=produtos&page=' . (++$currentPage) . '" rel="next">Suivant &gt;</a></li>';
+                                                echo '<li class="next"><a href="?pg=sales&page=' . (++$currentPage) . '" rel="next">Suivant &gt;</a></li>';
                                             } else {
                                                 echo '<li class="next"><a href="#" rel="next">Suivant &gt;</a></li>';
                                             }

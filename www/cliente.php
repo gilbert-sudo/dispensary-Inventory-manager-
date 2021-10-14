@@ -36,7 +36,26 @@ if (isset($_POST['acao'])) {
 ?>
 
 <?php
-$sql = $db->prepare("SELECT * FROM `tb_clientes`");
+// pagination
+$numRows = 0;
+$itemsPerPage = 30;
+$totalItemReq = $db->query('SELECT id FROM tb_clientes');
+while ($row = $totalItemReq->fetch(SQLITE3_ASSOC)) {
+    ++$numRows;
+}
+$totalItem = $numRows;
+$totalPages = ceil($totalItem / $itemsPerPage) + 1;
+if (isset($_GET['page']) and !empty($_GET['page']) and $_GET['page'] > 0 and $_GET['page'] <= $totalItem) {
+    $_GET['page'] = intval($_GET['page']);
+    $currentPage = $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+
+$begin = ($currentPage - 1) * $itemsPerPage;
+//end pagination
+
+$sql = $db->prepare("SELECT * FROM `tb_clientes` LIMIT $begin,$itemsPerPage");
 $sql->execute();
 $clientes = $sql->fetchAll();
 
@@ -98,13 +117,29 @@ $clientes = $sql->fetchAll();
 
             <div id="bottom" class="row">
                 <div class="col-md-12">
-                    <ul class="pagination">
-                        <li class="disabled"><a>&lt; Précédent</a></li>
-                        <li class="disabled"><a>1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li class="next"><a href="#" rel="next">Suivant &gt;</a></li>
-                    </ul><!-- /.pagination -->
+                <ul class="pagination">
+                    <?php if ($currentPage != 1) {
+                        $prev = $currentPage - 1;
+                        echo '<li class="prev"><a href="?pg=cliente&page=' . ($prev) . '" rel="next">&lt; Précedant</a></li>';
+                    } else {
+                        echo '<li><a href="#">&lt; Précedant</a></li>';
+                    }
+                    ?>
+                    <?php for ($i = 1; $i < $totalPages; $i++) {
+                        if ($i == $currentPage) {
+                            echo '<li><a  style="background-color: #75aca8; color:white;" href="#">' . $i . '</a></li>';
+                        } else {
+                            echo '<li><a href="?pg=cliente&page=' . $i . '">' . $i . '</a></li>';
+                        }
+                    } ?>
+                    <?php if ($currentPage < ($totalPages - 1)) {
+                        echo '<li class="next"><a href="?pg=cliente&page=' . (++$currentPage) . '" rel="next">Suivant &gt;</a></li>';
+                    } else {
+                        echo '<li class="next"><a href="#" rel="next">Suivant &gt;</a></li>';
+                    }
+                    ?>
+
+                </ul><!-- /.pagination --><!-- /.pagination -->
                 </div>
             </div> <!-- /#bottom -->
         </div>

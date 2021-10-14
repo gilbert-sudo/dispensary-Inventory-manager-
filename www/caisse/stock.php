@@ -71,7 +71,7 @@ $items = $result->fetchAll();
         </div>
       </div>
       <div class="bouton2">
-        <button>Recherche</button>
+        <button style="width: 150px;"><a href="../main.php?pg=produtos" style="text-decoration:none; color:black;">📑Détails</a></button>
         <button style="width: 240px;"><a href="#">Annuler une vente</a></button>
       </div>
     </div>

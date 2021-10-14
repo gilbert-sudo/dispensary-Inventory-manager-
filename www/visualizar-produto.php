@@ -1,16 +1,22 @@
 <?php
 include ('classes/Mysql.php');
 $id=$_GET['id'];
+
+if (isset($_POST['ajouter'])) {
+    $new_quant = $_POST['quantity'];
+    $old_quant = $_GET['old_quant'];
+    $quant = $new_quant+$old_quant;
+    $update_stock = $db->prepare("UPDATE tb_produtos SET quantidade = ? WHERE id = $id");
+    $update_stock->execute(array($quant));
+}
 $sql= $db->prepare("SELECT * FROM `tb_produtos` where id=$id");
 $sql->execute();
 $produto= $sql->fetch();
-
-
 ?>
 
 
 
-<h3 class="page-header">Produit n° <?php echo $produto['id']?></h3>
+<h3 class="page-header">Produit n° <?php echo $produto['codInterno']?></h3>
 
 <div class="row">
     <div class="col-md-4">
@@ -58,6 +64,7 @@ $produto= $sql->fetch();
         <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
         <a href="?pg=editar-produto&id=<?php echo $produto['id']?>" class="btn btn-dark">Editer</a>
         <?php endif; ?>
+        <a href="?pg=quick-add&id=<?php echo $produto['id']?>" class="btn btn-primary">En ajouter</a>
     </div>
 </div>
 <br>
