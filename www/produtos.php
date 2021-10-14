@@ -16,7 +16,7 @@ if (isset($_POST['acao'])) {
     $venda = $_POST['venda'];
     $quantidade = $_POST['quantidade'];
     $principio = $_POST['principio'];
-    $benef = $venda-$custo;
+    $benef = $venda - $custo;
 
     $sql = $db->prepare("UPDATE tb_produtos SET descricao = :descricao, codInterno = :codInterno, codBarras = :codBarras, fornecedor = :fornecedor, custo = :custo, venda = :venda , principio = :principio, quantidade = :quantidade, benefice = :benefice WHERE id = :id");
     $sql->bindValue(':id', $id);
@@ -97,8 +97,10 @@ $produtos = $sql->fetchAll();
                             <td><?php echo $value['quantidade'] ?></td>
                             <td class="actions">
                                 <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
-                                <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> ">Editer</a>
-                                <a onclick="return window.confirm('Voulez-vous vraiment supprimer ce produit ?');" class="btn btn-danger btn-xs" href="?pg=produtos&deletar=<?php echo $value['id']; ?>">Effacer</a>
+                                <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
+                                    <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> ">Editer</a>
+                                    <a onclick="return window.confirm('Voulez-vous vraiment supprimer ce produit ?');" class="btn btn-danger btn-xs" href="?pg=produtos&deletar=<?php echo $value['id']; ?>">Effacer</a>
+                                <?php endif; ?>
                             </td>
                     </tr>
                 <?php

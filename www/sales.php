@@ -88,7 +88,7 @@ include('classes/Mysql.php');
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <div class="navbar-brand" onclick="return window.confirm('Voulez-vous vraiment allez vers la caisse ?');"> <i class="pe-7s-cart"></i> <a href="caisse/index.php" style="color: #00a99d;text-decoration: none;">La caisse</a></div>
+                        <div class="navbar-brand"> <i class="pe-7s-cart"></i> <a href="caisse/index.php" style="color: #00a99d;text-decoration: none;">La caisse</a></div>
                     </div>
                     <div class="collapse navbar-collapse">
 

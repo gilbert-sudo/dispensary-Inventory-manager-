@@ -76,44 +76,46 @@ $finalcode = createRandomPassword();
                 </div>
 
                 <ul class="nav">
-                    <li <?php if (!isset($_GET['pg'])) {
-                            print 'class="active"';
-                        } ?>>
-                        <a href="main.php">
-                            <i class="pe-7s-home"></i>
-                            <p>Page d'accueil</p>
-                        </a>
-                    </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "profil" || $_GET['pg'] == "edit-profil") {
+                    <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
+                        <li <?php if (!isset($_GET['pg'])) {
                                 print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=profil">
-                            <i class="pe-7s-user"></i>
-                            <p>Profil</p>
-                        </a>
-                    </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "usuario") {
-                                print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=usuario">
-                            <i class="pe-7s-user"></i>
-                            <p>Utilisateurs</p>
-                        </a>
-                    </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "caisse") {
-                                print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=caisse">
-                            <i class="pe-7s-headphones"></i>
-                            <p>Caisse</p>
-                        </a>
-                    </li>
+                            } ?>>
+                            <a href="main.php">
+                                <i class="pe-7s-home"></i>
+                                <p>Page d'accueil</p>
+                            </a>
+                        </li>
+                        <li <?php if (isset($_GET['pg'])) {
+                                if ($_GET['pg'] == "profil" || $_GET['pg'] == "edit-profil") {
+                                    print 'class="active"';
+                                }
+                            } ?>>
+                            <a href="?pg=profil">
+                                <i class="pe-7s-user"></i>
+                                <p>Profil</p>
+                            </a>
+                        </li>
+                        <li <?php if (isset($_GET['pg'])) {
+                                if ($_GET['pg'] == "usuario") {
+                                    print 'class="active"';
+                                }
+                            } ?>>
+                            <a href="?pg=usuario">
+                                <i class="pe-7s-user"></i>
+                                <p>Utilisateurs</p>
+                            </a>
+                        </li>
+                        <li <?php if (isset($_GET['pg'])) {
+                                if ($_GET['pg'] == "caisse") {
+                                    print 'class="active"';
+                                }
+                            } ?>>
+                            <a href="?pg=caisse">
+                                <i class="pe-7s-headphones"></i>
+                                <p>Caisse</p>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li <?php if (isset($_GET['pg'])) {
                             if ($_GET['pg'] == "cliente") {
                                 print 'class="active"';
@@ -124,16 +126,18 @@ $finalcode = createRandomPassword();
                             <p>Les clients</p>
                         </a>
                     </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "categorie") {
-                                print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=categorie">
-                            <i class="pe-7s-ticket"></i>
-                            <p>Catégories</p>
-                        </a>
-                    </li>
+                    <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
+                        <li <?php if (isset($_GET['pg'])) {
+                                if ($_GET['pg'] == "categorie") {
+                                    print 'class="active"';
+                                }
+                            } ?>>
+                            <a href="?pg=categorie">
+                                <i class="pe-7s-ticket"></i>
+                                <p>Catégories</p>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li <?php if (isset($_GET['pg'])) {
                             if ($_GET['pg'] == "produtos") {
                                 print 'class="active"';
@@ -144,32 +148,34 @@ $finalcode = createRandomPassword();
                             <p>Produits</p>
                         </a>
                     </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "fornecedores") {
-                                print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=fornecedores">
-                            <i class="pe-7s-car"></i>
-                            <p>Fournisseurs</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chart/dashboard.php">
-                            <i class="pe-7s-graph2"></i>
-                            <p>Rapports</p>
-                        </a>
-                    </li>
-                    <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "extras") {
-                                print 'class="active"';
-                            }
-                        } ?>>
-                        <a href="?pg=extras">
-                            <i class="pe-7s-server"></i>
-                            <p>Suppléments</p>
-                        </a>
-                    </li>
+                    <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
+                        <li <?php if (isset($_GET['pg'])) {
+                                if ($_GET['pg'] == "fornecedores") {
+                                    print 'class="active"';
+                                }
+                            } ?>>
+                            <a href="?pg=fornecedores">
+                                <i class="pe-7s-car"></i>
+                                <p>Fournisseurs</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="chart/php/dashboard.php">
+                                <i class="pe-7s-graph2"></i>
+                                <p>Rapports</p>
+                            </a>
+                        </li>
+                        <li <?php if (isset($_GET['pg'])) {
+                                if ($_GET['pg'] == "extras") {
+                                    print 'class="active"';
+                                }
+                            } ?>>
+                            <a href="?pg=extras">
+                                <i class="pe-7s-server"></i>
+                                <p>Suppléments</p>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

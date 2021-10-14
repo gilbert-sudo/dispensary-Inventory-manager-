@@ -24,6 +24,7 @@ if (isset($_POST['acao'])) {
             $_SESSION['usuario'] = $usuario;
             $_SESSION['senha'] = $senha;
             $_SESSION['nome'] = $info['nome'];
+            $_SESSION['access'] = 1;
             header("Location:main.php");
         }
 

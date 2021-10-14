@@ -21,7 +21,7 @@ while ($row = $result->fetch(SQLITE3_ASSOC)) {
 $info = $result->fetch(SQLITE3_ASSOC);
 if ($numRows1 == 1) {
     $errMess = "Erreur: $code existe a été déja utilisé pour un autre client 📛";
-    header("location: ../user.php?errMess=$errMess&typeMess=danger&nom=$nome&num=$code&tel=$telefone&email=$email");
+    header("location: ../user.php?errMess=$errMess&typeMess=danger");
 } else {
     if (isset($_POST['enregistrer'])) {
         
@@ -30,8 +30,11 @@ if ($numRows1 == 1) {
         $telefone = 'non définie';
         $celular = 'non définie';
         $email = 'non définie';
+        $month_date = date('m');
+        $year_date = date('y');
+        $insciption_date = date('m/d/y');
         
-        $sql = $db->prepare("INSERT INTO tb_clientes (cpf ,nome ,dataNascimento ,endereco ,numero ,bairro ,telefone ,celular ,email) VALUES (:cpf ,:nome ,:dataNascimento ,:endereco ,:numero ,:bairro ,:telefone ,:celular ,:email)");
+        $sql = $db->prepare("INSERT INTO tb_clientes (cpf ,nome ,dataNascimento ,endereco ,numero ,bairro ,telefone ,celular ,email ,insciption_date, mois, an) VALUES (:cpf ,:nome ,:dataNascimento ,:endereco ,:numero ,:bairro ,:telefone ,:celular ,:email ,:insciption_date ,:month_date ,:year_date)");
         $sql->bindValue(':cpf', $cpf);
         $sql->bindValue(':nome', $nome);
         $sql->bindValue(':dataNascimento', $dataNascimento);
@@ -41,6 +44,9 @@ if ($numRows1 == 1) {
         $sql->bindValue(':telefone', $telefone);
         $sql->bindValue(':celular', $celular);
         $sql->bindValue(':email', $email);
+        $sql->bindValue(':insciption_date', $insciption_date);
+        $sql->bindValue(':month_date', $month_date);
+        $sql->bindValue(':year_date', $year_date);
         $sql->execute();
         $errMess = "$nome a bien été enregistrer en tant que client ✅";
         header("location: ../user.php?errMess=$errMess&typeMess=success");

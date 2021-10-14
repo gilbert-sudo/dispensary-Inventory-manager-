@@ -62,7 +62,7 @@ if (isset($_GET['item'])) {
           <td>
             <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
-          <td><a href="../logout.php" class="btn btn-danger loggout" style="position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;" onMouseOut="this.style='position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;'" onMouseOver="this.style='position: absolute;right: 5%;top: 0%;color: white;border: 2px solid #00a99d;background-color: #00a99d;text-decoration: none;'">Se déconnecter</a></td>
+          <td><a href="php/actual.php?reload=true" class="btn btn-danger loggout" style="position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;" onMouseOut="this.style='position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;'" onMouseOver="this.style='position: absolute;right: 5%;top: 0%;color: white;border: 2px solid #00a99d;background-color: #00a99d;text-decoration: none;'">Actualiser</a></td>
         </table>
       </div>
 
@@ -133,11 +133,14 @@ if (isset($_GET['item'])) {
             <div class="bouton2">
               <button type="submit" name="facturer" style="width: 140px;">📠 Encaisser</button>
               <a href="../sales.php" style="text-decoration:none; color:black;">🛒 Ventes</a>
-              <a href="user.php" style="text-decoration:none; color:black;">➕ Clients</a>
+              <a href="../main.php?pg=cliente" style="text-decoration:none; color:black;">➕ Clients</a>
             </div>
 
           </form>
 
+          <?php if (isset($_GET['finaliser'])) {
+            include('cupon-fiscal.php');
+          } ?>
         </div>
       </div>
       <!-- fin affichage panier -->
@@ -145,10 +148,6 @@ if (isset($_GET['item'])) {
       <!-- fin app content -->
     </div>
   </content>
-  
-  <?php if (isset($_GET['finaliser'])) {
-          include('cupon-fiscal.php');
-        } ?>
 
   <script src="../js/caisse.js"></script>
 

@@ -30,7 +30,7 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="exampleInputEmail1">Mot de passe</label>
-                <input type="password"  required type= "password" class="form-control" name="senha" placeholder="Digite a Senha">
+                <input type="text"  required type= "password" class="form-control" name="senha" placeholder="Digite a Senha">
             </div>
 
         </div>

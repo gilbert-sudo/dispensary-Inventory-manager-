@@ -104,11 +104,7 @@ include('../classes/Sistema.php');
                                                       }; ?> required>
                 </div>
                 <div class="row rtwo">
-                  <input type="date" name="clientPhone" <?php if (isset($_GET['tel']) & !empty($_GET['tel'])) {
-                                                            echo "value=" . $_GET['tel'];
-                                                          } else {
-                                                            echo "placeholder='Entrer une date'";
-                                                          }; ?>>
+                  <input type="date" name="clientPhone" required>
                 </div>
                 <div class="row rthree">
                   <input type="text" name="clientMail" <?php if (isset($_GET['email']) & !empty($_GET['email'])) {

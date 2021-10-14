@@ -25,6 +25,8 @@ $numRows = 0;
                         $_SESSION['usuario'] = $usuario;
                         $_SESSION['senha'] = $senha;
                         $_SESSION['nome']=$info['nome'];
+                        $_SESSION['access'] = 1;
+
                       header("Location: ../../main.php");
                     }
                     

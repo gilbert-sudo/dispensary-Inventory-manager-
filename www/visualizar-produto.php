@@ -27,11 +27,12 @@ $produto= $sql->fetch();
         <p><strong>Fournisseur</strong></p>
         <p><?php echo "n°".$produto['fornecedor']?></p>
     </div>
-
+    <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
     <div class="col-md-4">
         <p><strong>Prix d'achat</strong></p>
         <p><?php echo $produto['custo']?></p>
     </div>
+    <?php endif; ?>
 
     <div class="col-md-4">
         <p><strong>Prix de vente</strong></p>
@@ -53,8 +54,10 @@ $produto= $sql->fetch();
 <hr />
 <div id="actions" class="row">
     <div class="col-md-12">
-        <a href="?pg=produtos" class="btn btn-primary">Fermer</a>
+        <a href="?pg=produtos" class="btn btn-danger">Fermer</a>
+        <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
         <a href="?pg=editar-produto&id=<?php echo $produto['id']?>" class="btn btn-dark">Editer</a>
+        <?php endif; ?>
     </div>
 </div>
 <br>

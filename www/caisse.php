@@ -62,7 +62,7 @@ if(isset($_POST['acao'])){
                     <th>ID</th>
                     <th>Nom</th>
                     <th>Bureau</th>
-                    <th>Caisse</th>
+                    <th>Nom d'utilisateur</th>
                     <th class="actions">Actions</th>
                 </tr>
                 </thead>
