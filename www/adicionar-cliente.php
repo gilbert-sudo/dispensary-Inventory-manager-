@@ -1,40 +1,6 @@
-<?php
-include('classes/Mysql.php');
-
-?>
 <div class="cadastro-cliente">
     <h3 class="page-header">Ajouter un client</h3>
-    <form class="form-cliente" method="post" enctype="multipart/form-data">
-
-        <?php
-
-        if (isset($_POST['acao'])) {
-            $nome = $_POST['nome'];
-            $dataNascimento = $_POST['dataNascimento'];
-            $bairro = $_POST['bairro'];
-            $numero = $_POST['numero'];
-            if (empty($_POST['cpf'])) {$cpf = 'indéfinie';} else {$cpf = $_POST['cpf'];}
-            if (empty($_POST['endereco'])) {$endereco = 'indéfinie';} else {$endereco = $_POST['endereco'];}
-            if (empty($_POST['telefone'])) {$telefone = 'indéfinie';} else {$telefone = $_POST['telefone'];}
-            if (empty($_POST['celular'])) {$celular = 'indéfinie';} else {$celular = $_POST['celular'];}
-            if (empty($_POST['email'])) {$email = 'indéfinie';} else {$email = $_POST['email'];}
-            
-
-            $sql = $db->prepare("INSERT INTO tb_clientes (cpf ,nome ,dataNascimento ,endereco ,numero ,bairro ,telefone ,celular ,email) VALUES (:cpf ,:nome ,:dataNascimento ,:endereco ,:numero ,:bairro ,:telefone ,:celular ,:email)");
-            $sql->bindValue(':cpf', $cpf);
-            $sql->bindValue(':nome', $nome);
-            $sql->bindValue(':dataNascimento', $dataNascimento);
-            $sql->bindValue(':endereco', $endereco);
-            $sql->bindValue(':numero', $numero);
-            $sql->bindValue(':bairro', $bairro);
-            $sql->bindValue(':telefone', $telefone);
-            $sql->bindValue(':celular', $celular);
-            $sql->bindValue(':email', $email);
-            $sql->execute();
-        }
-
-        ?>
-
+    <form class="form-cliente" method="post" enctype="multipart/form-data" action="php/add-cliente.php">
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="exampleInputEmail1">Nom <small style="color: red;">(Obligatoire)</small></label>
@@ -78,8 +44,8 @@ include('classes/Mysql.php');
 
         </div>
 
-
-
+        <hr />
+        <?php showErr(); ?>
         <hr />
 
         <div class="row">

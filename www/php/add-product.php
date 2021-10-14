@@ -7,7 +7,11 @@ $db = connect('../pharmacie.db');
             $codInterno = $_POST['codInterno'];
             $codBarras = ' ';
             $fornecedor = $_POST['fornecedor'];
-            $custo = $_POST['custo'];
+            if ($_POST['custo'] == 'false') {
+                $custo = $_POST['venda'];
+            }else {
+                $custo = $_POST['custo'];
+            }
             $venda = $_POST['venda'];
             $quantidade = $_POST['quantidade'];
             $principio = $_POST['principio'];

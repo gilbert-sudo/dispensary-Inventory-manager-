@@ -37,17 +37,7 @@
             </div>
             <hr />
 
-            <?php
-            if (isset($_GET['err'])) {
-                if (($_GET['err']) == 1) {
-                    if (isset($_GET['typeMess']) && isset($_GET['errMess'])) {
-                        $TypeMess = $_GET['typeMess'];
-                        $errMess = $_GET['errMess'];
-                        echo '<button name="error" class="btn btn-' . $TypeMess . '" onclick="return false;"> ' . $errMess . '</button>';
-                    }
-                }
-            }
-            ?>
+            <?php showErr(); ?>
             <hr />
 
             <div class="row">

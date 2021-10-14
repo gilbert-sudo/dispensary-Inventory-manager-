@@ -45,11 +45,15 @@ include('classes/Mysql.php');
 
         </div>
         <div class="row">
-            <div class="form-group col-md-3">
-                <label>Prix d'achat</label>
-                <input type="number" required type="number" class="form-control" name="custo" placeholder="Entrez le montant du coût du produit" step="0.01">
-            </div>
-
+            <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
+                <div class="form-group col-md-3">
+                    <label>Prix d'achat</label>
+                    <input type="number" required type="number" class="form-control" name="custo" placeholder="Entrez le montant du coût du produit" step="0.01">
+                </div>
+            <?php endif; ?>
+            <?php if (!isset($_SESSION['access'])) : ?>
+                    <input type="hidden" required class="form-control" name="custo" value="false">
+            <?php endif; ?>
             <div class="form-group col-md-3">
                 <label>Prix de vente</label>
                 <input type="number" required type="number" class="form-control" name="venda" placeholder="Entrez le prix de vente " step="0.01">
@@ -85,23 +89,13 @@ include('classes/Mysql.php');
         </div>
 
         <hr>
-        <?php
-        if (isset($_GET['err'])) {
-            if (($_GET['err']) == 1) {
-                if (isset($_GET['typeMess']) && isset($_GET['errMess'])) {
-                    $TypeMess = $_GET['typeMess'];
-                    $errMess = $_GET['errMess'];
-                echo '<button name="error" class="btn btn-' . $TypeMess . '" onclick="return false;"> ' . $errMess . '</button>';
-                }
-            }
-        }
-        ?>
+        <?php showErr(); ?>
         <hr />
 
         <div class="row">
             <div class="col-md-12">
                 <button type="submit" name="acao" class="btn btn-primary">Enregistrer</button>
-                <a href="?pg=fornecedores" class="btn btn-default">Annuler</a>
+                <a href="?pg=produtos" class="btn btn-danger">Annuler</a>
             </div>
         </div>
 

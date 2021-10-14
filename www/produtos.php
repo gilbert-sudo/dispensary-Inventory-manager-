@@ -92,9 +92,9 @@ $produtos = $sql->fetchAll();
 
                     <tr>
                         <?php foreach ($produtos as $value) : ?>
-                            <td><?php echo $value['codInterno'] ?></td>
-                            <td><?php echo $value['descricao'] ?></td>
-                            <td><?php echo $value['quantidade'] ?></td>
+                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['codInterno'] ?></td>
+                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['descricao'] ?></td>
+                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['quantidade'] ?></td>
                             <td class="actions">
                                 <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
                                 <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
