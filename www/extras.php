@@ -8,13 +8,13 @@
 
         <div class="col-md-2" style="margin-top: 100px;margin-left: 50px">
             <label>
-              <a href="backup.php "><button  style="width: 65px;height: 43px"><i class="pe-7s-server"></i> </button></a>
+              <a href="#"><button  style="width: 65px;height: 43px"><i class="pe-7s-server"></i> </button></a>
                 <p>BAKCUP</p></label>
         </div>
 
         <div class="col-md-2" style="margin-top: 100px">
             <label>
-                    <a href="?pg=lembrete"><button  style="width: 65px;height: 43px"><i class="pe-7s-note"></i> </button></a>
+                    <a href="#"><button  style="width: 65px;height: 43px"><i class="pe-7s-note"></i> </button></a>
                 <p>RAPPEL</p>
                 </label>
         </div>

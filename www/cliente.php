@@ -7,6 +7,32 @@ if (isset($_GET['deletar'])) {
 }
 
 
+if (isset($_POST['acao'])) {
+    $id = $_GET['id'];
+    $nome = $_POST['nome'];
+    $cpf = 'non identifié';
+    $dataNascimento = $_POST['dataNascimento'];
+    $endereco = 'non identifié';
+    $numero = $_POST['numero'];
+    $bairro = $_POST['bairro'];
+    $telefone = $_POST['telefone'];
+    $celular = 'non identifié';
+    $email = $_POST['email'];
+
+    $sql = ("UPDATE tb_clientes SET cpf = :cpf, nome = :nome, dataNascimento = :dataNascimento, endereco = :endereco, numero = :numero, bairro = :bairro, telefone = :telefone, celular = :celular, email = :email WHERE id = :id");
+                $sql = $db->prepare($sql);
+                $sql->bindValue(':cpf', $cpf);
+                $sql->bindValue(':nome', $nome);
+                $sql->bindValue(':dataNascimento', $dataNascimento);
+                $sql->bindValue(':endereco', $endereco);
+                $sql->bindValue(':numero', $numero);
+                $sql->bindValue(':bairro', $bairro);
+                $sql->bindValue(':telefone', $telefone);
+                $sql->bindValue(':celular', $celular);
+                $sql->bindValue(':email', $email);
+                $sql->bindValue(':id', $id);
+                $sql->execute();
+}
 ?>
 
 <?php

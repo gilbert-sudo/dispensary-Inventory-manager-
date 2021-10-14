@@ -13,29 +13,7 @@ if(isset($_GET['id'])){
 
 <div class="cadastro-cliente">
 <h3 class="page-header">Editer un client</h3>
-<form class="form-cliente" method="post" enctype="multipart/form-data">
-
-<?php
-    if(isset($_POST['acao'])){
-    $nome=$_POST['nome'];
-    $cpf='non identifié';
-    $dataNascimento=$_POST['dataNascimento'];
-    $endereco='non identifié';
-    $numero=$_POST['numero'];
-    $bairro=$_POST['bairro'];
-    $telefone=$_POST['telefone'];
-    $celular='non identifié';
-    $email=$_POST['email'];
-
-        $sql = $db->prepare("INSERT INTO `tb_clientes` VALUES (null,?,?,?,?,?,?,?,?,?)");
-        $sql->execute(array($cpf,$nome,$dataNascimento,$endereco,$numero,$bairro,$telefone,$celular,$email));
-
-
-}
-    ?>
-
-
-
+<form class="form-cliente" method="post" enctype="multipart/form-data" action="?pg=cliente&id=<?= $id ?>">
     <div class="row">
         <div class="form-group col-md-4">
             <label for="exampleInputEmail1">Nom</label>
