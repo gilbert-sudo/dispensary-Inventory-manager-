@@ -10,6 +10,7 @@ include('../classes/Sistema.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/logout.css">
   <title>Logiciel vente</title>
   <style type="text/css">
     .container {
@@ -55,27 +56,7 @@ include('../classes/Sistema.php');
     .btn-primary span {
       font-size: 15px
     }
-       /* ==============================
-         CAISSE LOGGOUT BUTTON
-    =============================== */
-    .loggout {
-      position: absolute;
-      right: 5%;
-      top: 0%;
-      border: 2px solid #00a99d;
-      background-color: white;
-    }
-
-    .loggout>a {
-      color: #00a99d;
-      text-decoration: none;
-    }
-
-    .loggout>a:hover {
-      color: white;
-      text-decoration: none;
-    }
-
+   
   </style>
 </head>
 
@@ -97,7 +78,7 @@ include('../classes/Sistema.php');
           <td>
             <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
-          <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
+          <td><a href="../logout.php" class="btn btn-danger loggout">Se déconnecter</a></td>
         </table>
       </div>
       <div class="content">
@@ -136,7 +117,7 @@ include('../classes/Sistema.php');
                                                           echo "placeholder='Entrer une adresse (obligatoire)'";
                                                         }; ?> style="margin-bottom: 30px;" required>
                   <button type="submit" name="enregistrer" class="btn btn-primary mt-3" style="margin-left: 20px;"><span>Enregister</span></button>
-                  <button class="btn btn-danger mt-3"><a href="index.php" style="text-decoration:none; color:white;">Annuler</a> </button>
+                  <a class="btn btn-danger mt-3" href="index.php" style="text-decoration:none; color:white;">Annuler</a>
                 </div>
                 <?php if (isset($_GET['errMess'])) : ?>
                   <div class="alert alert-<?= $_GET['typeMess']; ?>" style="margin-top: 20px;"><?= $_GET['errMess']; ?></div>

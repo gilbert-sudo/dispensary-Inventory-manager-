@@ -345,9 +345,18 @@ button{
     width: 125px;
     font-size: 20px;
     background: #00a99d;
+    border: 3px solid black;
+    border-color: black;
+    border-radius: 20px;
+}
+.bouton2 > a {
+    width: 125px;
+    font-size: 18px;
+    background: #00a99d;
     border-style: solid;
     border-color: black;
     border-radius: 20px;
+    padding: 5px;
 }
 .c{
     font-size: 28px;

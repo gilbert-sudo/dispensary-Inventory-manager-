@@ -25,7 +25,7 @@ if (isset($_GET['item'])) {
     //update quant in the inventory
     $sql2 = $db->prepare("UPDATE tb_produtos SET quantidade = :quantidade WHERE codInterno = :code");
     $sql2->bindValue(':code', $proID[$a]);
-    $sql2->bindValue(':quantidade', ($reste+$quant[$a]));
+    $sql2->bindValue(':quantidade', ($reste + $quant[$a]));
     $sql2->execute();
     //END update quant in the inventory
     ++$a;
@@ -42,28 +42,6 @@ if (isset($_GET['item'])) {
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <title>Logiciel vente</title>
-  <style>
-    /* ==============================
-         CAISSE LOGGOUT BUTTON
-    =============================== */
-    .loggout {
-      position: absolute;
-      right: 5%;
-      top: 0%;
-      border: 2px solid #00a99d;
-      background-color: white;
-    }
-
-    .loggout>a {
-      color: #00a99d;
-      text-decoration: none;
-    }
-
-    .loggout>a:hover {
-      color: white;
-      text-decoration: none;
-    }
-  </style>
 </head>
 
 <body>
@@ -84,7 +62,7 @@ if (isset($_GET['item'])) {
           <td>
             <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
-          <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
+          <td><a href="../logout.php" class="btn btn-danger loggout" style="position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;" onMouseOut="this.style='position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;'" onMouseOver="this.style='position: absolute;right: 5%;top: 0%;color: white;border: 2px solid #00a99d;background-color: #00a99d;text-decoration: none;'">Se déconnecter</a></td>
         </table>
       </div>
 
@@ -127,12 +105,16 @@ if (isset($_GET['item'])) {
             <button onclick="resetinput();">Effacer</button>
             <button onclick="ajouter();totalprixnet();">Ajouter >> </button>
           </div>
+
         </div>
 
         <div id="tab2" class="col-md-8">
           <!-- debut affichage panier -->
+
           <form action="../finir.php" method="post" class="formulaire">
+
             <div id="Block22">
+
               <ul class="colonne3">
                 <li><a>nom</a></li>
                 <li><a>P.U</a></li>
@@ -150,13 +132,12 @@ if (isset($_GET['item'])) {
             </div>
             <div class="bouton2">
               <button type="submit" name="facturer" style="width: 140px;">📠 Encaisser</button>
-              <button><a href="../sales.php" style="text-decoration:none; color:black;">🛒 Ventes</a></button>
-              <button><a href="user.php" style="text-decoration:none; color:black;">➕ Clients</a></button>
+              <a href="../sales.php" style="text-decoration:none; color:black;">🛒 Ventes</a>
+              <a href="user.php" style="text-decoration:none; color:black;">➕ Clients</a>
             </div>
+
           </form>
-          <?php if (isset($_GET['finaliser'])) {
-            include('cupon-fiscal.php');
-          } ?>
+
         </div>
       </div>
       <!-- fin affichage panier -->
@@ -164,6 +145,10 @@ if (isset($_GET['item'])) {
       <!-- fin app content -->
     </div>
   </content>
+  
+  <?php if (isset($_GET['finaliser'])) {
+          include('cupon-fiscal.php');
+        } ?>
 
   <script src="../js/caisse.js"></script>
 

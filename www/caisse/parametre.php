@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/prm.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/logout.css">
   <title>Logiciel vente</title>
   <style>
     .passview {
@@ -21,24 +22,8 @@
       background-color: #00a99d;
       color: white;
     }
-    /* ==============================
-         CAISSE LOGGOUT BUTTON
-    =============================== */
-    .loggout{
-      position: absolute;
-      right: 5%;
-      top: 0%;
-      border: 2px solid #00a99d;
-      background-color: white;
-    }
-    .loggout > a {
-      color: #00a99d;
-      text-decoration: none;
-    }
-    .loggout > a:hover {
-      color: white;
-      text-decoration: none;
-    }
+
+
     /* ==============================
          TOGGLE SWITCH UI BUTTON
     =============================== */
@@ -111,7 +96,7 @@
           <td>
             <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
-          <td><button class="btn btn-danger loggout"> <a href="../logout.php">Se déconnecter</a></button></td>
+          <td><a href="../logout.php" class="btn btn-danger loggout">Se déconnecter</a></td>
         </table>
       </div>
       <div class="title">
