@@ -139,7 +139,7 @@ $finalcode = createRandomPassword();
                         </li>
                     <?php endif; ?>
                     <li <?php if (isset($_GET['pg'])) {
-                            if ($_GET['pg'] == "produtos") {
+                            if (($_GET['pg'] == "produtos") || ($_GET['pg'] == "export")) {
                                 print 'class="active"';
                             }
                         } ?>>

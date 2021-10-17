@@ -1,6 +1,6 @@
 <?php
 include( 'classes/Mysql.php' );
-$usuario = $_SESSION['usuario'];
+$usuario = $_SESSION['nome'];
 ?>
 <div class="home">
     <div class="rom">

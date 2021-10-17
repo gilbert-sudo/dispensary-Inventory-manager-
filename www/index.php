@@ -18,8 +18,9 @@ if (isset($_POST['acao'])) {
         while ($row = $result->fetch(SQLITE3_ASSOC)) {
             ++$numRows;
         }
-        $info = $result->fetch(SQLITE3_ASSOC);
         if ($numRows == 1) {
+            $result->execute();
+            $info = $result->fetch();
             $_SESSION['id'] = $info['id'];
             $_SESSION['usuario'] = $usuario;
             $_SESSION['senha'] = $senha;

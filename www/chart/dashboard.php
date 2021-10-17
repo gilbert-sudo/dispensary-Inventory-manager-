@@ -54,11 +54,6 @@ $profil = $sql->fetch();
 <body>
     <div class="wrapper">
         <div class="sidebar" data-color="black" data-image="../img/aa.jpg" style="background-color: #00ffee;">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
             <div class="sidebar-wrapper" style="overflow: hidden;">
                 <div class="logo">
                     <img src="../img/farmacia-logo.png" alt="logo" width="60px">

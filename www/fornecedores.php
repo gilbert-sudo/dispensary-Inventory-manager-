@@ -24,7 +24,7 @@ $fornecedores= $sql->fetchAll();
         </div>
         <div class="col-sm-5 btn-lista">
             <a class="btn btn-primary" href="?pg=adicionar-fornecedor"><i class="fa fa-plus"></i> Ajouter un Fournisseur</a>
-            <a class="btn btn-default" href="?pg=fornecedor"><i class="fa fa-refresh"></i> Actualiser</a>
+            <a class="btn btn-default" href="?pg=fornecedores"><i class="fa fa-refresh"></i> Actualiser</a>
         </div>
     </div>
 

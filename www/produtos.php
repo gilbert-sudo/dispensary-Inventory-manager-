@@ -70,7 +70,7 @@ $produtos = $sql->fetchAll();
         </div>
         <div class="col-sm-4 btn-lista">
             <a class="btn btn-primary" href="?pg=adicionar-produto"><i class="fa fa-plus"></i> Ajouter un produit</a>
-            <a class="btn btn-default" href="?pg=produtos"><i class="fa fa-refresh"></i> Actualiser</a>
+            <a class="btn btn-success" href="?pg=export"><i class="fa fa-plus"></i> Exporter</a>
         </div>
     </div>
 
@@ -92,14 +92,14 @@ $produtos = $sql->fetchAll();
 
                     <tr>
                         <?php foreach ($produtos as $value) : ?>
-                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['codInterno'] ?></td>
-                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['descricao'] ?></td>
-                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['quantidade'] ?></td>
-                            <td class="actions">
-                                <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
+                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['codInterno'] ?></td>
+                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['descricao'] ?></td>
+                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['quantidade'] ?></td>
+                            <td class="actions" <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> >
+                                <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>" style="background-color: white;" >Regarder</a>
                                 <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
-                                    <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> ">Editer</a>
-                                    <a onclick="return window.confirm('Voulez-vous vraiment supprimer ce produit ?');" class="btn btn-danger btn-xs" href="?pg=produtos&deletar=<?php echo $value['id']; ?>">Effacer</a>
+                                    <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> " style="background-color: white;" >Editer</a>
+                                    <a onclick="return window.confirm('Voulez-vous vraiment supprimer ce produit ?');" class="btn btn-danger btn-xs" href="?pg=produtos&deletar=<?php echo $value['id']; ?>" style="background-color: white;">Effacer</a>
                                 <?php endif; ?>
                             </td>
                     </tr>

@@ -10,7 +10,7 @@
         "log_file": "debug.log"
     },
     "main_window": {
-        "title": "DISPENSAIRE SAHASOA",
+        "title": "DISPENSAIRE ANGLICAN TSINJOHASINA",
         "icon": "favicon.ico",
         "default_size": [1040, 660],
         "minimum_size": [1039, 659],
@@ -25,7 +25,7 @@
     },
     "popup_window": {
         "icon": "favicon.ico",
-        "fixed_title": "Dispensaire SAHASOA",
+        "fixed_title": "DISPENSAIRE ANGLICAN TSINJOHASINA",
         "center_relative_to_parent": true,
         "default_size": [800, 600]
     },
@@ -54,7 +54,7 @@
             "enable_menu": true,
             "navigation": true,
             "print": true,
-            "view_source": true,
+            "view_source": false,
             "open_in_external_browser": true,
             "devtools": false
         }
