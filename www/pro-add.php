@@ -12,10 +12,10 @@
         <div class="row">
 
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-7">
                 <input type="file" required class="btn btn-primary" name="file1">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <button class="btn btn-primary" type="submit" name="import_btn">Importer</button>
             </div>
 
