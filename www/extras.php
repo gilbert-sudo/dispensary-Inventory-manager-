@@ -18,6 +18,13 @@
                 <p>RAPPEL</p>
                 </label>
         </div>
+        
+        <div class="col-md-2" style="margin-top: 100px;">
+            <label>
+              <a href="?pg=pro-add"><button  style="width: 65px;height: 43px"><i class="pe-7s-server"></i> </button></a>
+                <p>PRODUITS</p></label>
+        </div>
+
 
         </div>
     </div>

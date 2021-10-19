@@ -70,7 +70,7 @@ $produtos = $sql->fetchAll();
         </div>
         <div class="col-sm-4 btn-lista">
             <a class="btn btn-primary" href="?pg=adicionar-produto"><i class="fa fa-plus"></i> Ajouter un produit</a>
-            <a class="btn btn-success" href="?pg=export"><i class="fa fa-plus"></i> Exporter</a>
+            <a class="btn btn-success" href="?pg=export" onclick="return window.confirm('Etes-vous vraiment sûre de vouloir éxporter le programme?');"><i class="fa fa-plus"></i> Exporter</a>
         </div>
     </div>
 
