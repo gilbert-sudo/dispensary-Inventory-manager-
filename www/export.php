@@ -21,12 +21,12 @@ $reset_pro->execute();
 ?>
 <div  align="center">
     <h3>
-       <big><strong>🔔</strong></big> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Votre programme a bien été exporté ✅ <br><small> Dans votre bureau sous le nom de </small><strong>Produits.db</strong> 
+       <big><strong>🔔</strong></big> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Votre programme a bien été exporté ✅ <br><small> sur votre bureau sous le nom de </small><strong>Produits.db</strong> 
     </h3>
 </div>
 <hr>
 <div align="center">
     <h4>L'avez-vous trouver?</h4>
-    <a class="btn btn-danger" href="php/reveal-dasktop.php">NON, Ouvrir mon bureau 🤔!</a>
+    <a class="btn btn-danger" href="php/reveal-dasktop.php?header=export">NON, Ouvrir mon bureau 🤔!</a>
     <a class="btn btn-primary" href="?pg=produtos">Merci, Je l'ais trouvé 🙂!</a>
 </div>
