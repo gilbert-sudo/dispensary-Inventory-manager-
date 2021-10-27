@@ -37,14 +37,16 @@ include('classes/Mysql.php');
     <link href='css/css' rel='stylesheet' type='text/css'>
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
     <style>
-        #total{
+        #total {
             height: 30px;
             padding: 10px;
         }
-        #total1{
+
+        #total1 {
             margin-top: 13px;
         }
-        #list{
+
+        #list {
             margin-top: 50px;
         }
     </style>
@@ -114,7 +116,13 @@ include('classes/Mysql.php');
 
                         $numRows = 0;
                         $itemsPerPage = 30;
-                        $totalItemReq = $db->query("SELECT id FROM tb_produit_vendu WHERE date = '$date'");
+
+                        if (isset($_GET['type'])) {
+                            $type = $_GET['type'];
+                            $totalItemReq = $db->query("SELECT id FROM tb_produit_vendu WHERE date = '$date' AND type = '$type'");
+                        } else {
+                            $totalItemReq = $db->query("SELECT id FROM tb_produit_vendu WHERE date = '$date'");
+                        }
                         while ($row = $totalItemReq->fetch(SQLITE3_ASSOC)) {
                             ++$numRows;
                         }
@@ -129,23 +137,42 @@ include('classes/Mysql.php');
 
                         $begin = ($currentPage - 1) * $itemsPerPage;
                         //end pagination
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
+                        if (isset($_GET['type'])) {
+                            $type = $_GET['type'];
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' AND type = '$type'");
+                        } else {
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
+                        }
+
                         $sql->execute();
                         $totals = $sql->fetchAll();
                         $total = 0;
                         $totalQuant = array_column($totals, 'quant');
                         $totalnbr = count(array_column($totals, 'quant'));
                         $totalPrice = array_column($totals, 'valeur');
-                        for ($i=0; $i < $totalnbr; $i++) { 
+                        for ($i = 0; $i < $totalnbr; $i++) {
                             $total2 = intval($totalQuant[$i]) * intval($totalPrice[$i]);
                             $total = $total + $total2;
                         }
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
+
+                        if (isset($_GET['type'])) {
+                            $type = $_GET['type'];
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' AND type = '$type'");
+                        } else {
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
+                        }
+
                         $sql->execute();
                         $andranas = $sql->fetchAll();
                         $andranas = array_column($andranas, 'date');
-                        
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' LIMIT $begin,$itemsPerPage");
+
+                        if (isset($_GET['type'])) {
+                            $type = $_GET['type'];
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' AND type = '$type' LIMIT $begin,$itemsPerPage");
+                        } else {
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' LIMIT $begin,$itemsPerPage");
+                        }
+
                         $sql->execute();
                         $produtos = $sql->fetchAll();
                         ?>
@@ -157,10 +184,49 @@ include('classes/Mysql.php');
                                 <div class="col-sm-7">
                                     <h2>Ventes d'aujourd'hui</h2>
                                 </div>
-                               <a class="btn btn-primary" href="sales.php" style="margin-top: 35px; margin-left:20%;"><i class="fa fa-refresh"></i> Actualiser</a>
+                                <div class="col-sm-5" style="margin-top: 35px;">
+                                    <a class="btn btn-primary" href="sales.php"><i class="fa fa-refresh"></i> Imprimer</a>
+                                    <a class="btn btn-default" href="sales.php"><i class="fa fa-refresh"></i> Voir tous</a>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
                                 <table style="position: absolute; margin-left:20px;">
-                                    <td><h4 id="total1">Total ventes:</h4> </td>
-                                    <td><input type="text" name="total" value="<?=number_format($total, 2).' Ar';?>" disabled id="total"></td>
+                                    <td>
+                                        <h4 id="total1">Total ventes:</h4>
+                                    </td>
+                                    <td><input type="text" name="total" value="<?= number_format($total, 2) . ' Ar'; ?>" disabled id="total"></td>
+                                    <form action="#" method="get">
+                                        <td>
+                                            <?php
+                                            $sql = $db->prepare("SELECT type FROM `tb_produit_vendu` WHERE date = '$date'");
+                                            $sql->execute();
+                                            $reg = $sql->fetchAll();
+                                            $reg = array_unique(array_column($reg, 'type'));
+                                            $a = count($reg);
+                                            $cont = 0;
+                                            ?>
+                                            <select name="type" size="1" style="margin:0 10px 0 20px; height: 40px; border: 2px solid #1D62F0;">
+                                                <?php while ($cont < $a) { 
+                                                     while (!isset($reg[$cont])) {
+                                                        $cont++;
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $reg[$cont]; ?>">
+                                                        <?php echo $reg[$cont]; ?>
+                                                    </option>
+                                                <?php $cont++;
+                                                }
+                                                ?>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary" type="submit">🔍</button>
+                                        </td>
+                                    </form>
+
                                 </table>
                             </div>
 
@@ -186,7 +252,7 @@ include('classes/Mysql.php');
                                                     <td><?php echo $value['nom'] ?></td>
                                                     <td><?php echo $value['quant'] ?></td>
                                                     <td><?php echo $value['valeur'] ?></td>
-                                                    <td><?php echo ($value['valeur']*$value['quant']) ?></td>
+                                                    <td><?php echo ($value['valeur'] * $value['quant']) ?></td>
                                                     <td class="actions">
                                                         <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
                                                     </td>

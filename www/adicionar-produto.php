@@ -60,7 +60,7 @@ include('classes/Mysql.php');
             </div>
             <div class="form-group col-md-3">
                 <label>La quantité</label>
-                <input type="number" min="0" oninput="validity.valid||(value='');" required type="number" class="form-control" name="quantidade" placeholder="Entrez la quantité du produit">
+                <input min="0" step="0.1" oninput="validity.valid||(value='');" required type="number" class="form-control" name="quantidade" placeholder="Entrez la quantité du produit">
             </div>
         </div>
         <div class="row">

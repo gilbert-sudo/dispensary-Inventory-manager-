@@ -42,7 +42,7 @@ $produto = $sql->fetch();
             </div>
             <div class="form-group col-md-3">
                 <label>Quantité</label>
-                <input type="number" required type="number" class="form-control" name="quantidade" value="<?php echo $produto['quantidade']; ?>">
+                <input  min="0" step="0.1" oninput="validity.valid||(value='');"  required type="number" class="form-control" name="quantidade" value="<?php echo $produto['quantidade']; ?>">
             </div>
         </div>
         <div class="row">

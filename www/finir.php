@@ -53,6 +53,7 @@ if (isset($_POST['facturer'])) {
         $quantbefore = $pro['quantidade'];
         $quant = $qttitems[$i];
         $benefice = $pro['benefice']*$quant;
+        $type = $pro['principio'];
         //update quant in the inventory
         $sql2 = $db->prepare("UPDATE tb_produtos SET quantidade = :quantidade WHERE codInterno = :code");
         $sql2->bindValue(':code', $codeitems[$i]);
@@ -61,7 +62,7 @@ if (isset($_POST['facturer'])) {
         //END update quant in the inventory
         $valeur = $pro['venda'];
         $date = date("m/d/y");
-        $sql = $db->prepare("INSERT INTO tb_produit_vendu (numero, codebare, nom, quant, valeur, date, benefice) VALUES (:numero, :codebare, :nom, :quant, :valeur, :date, :benefice)");
+        $sql = $db->prepare("INSERT INTO tb_produit_vendu (numero, codebare, nom, quant, valeur, date, benefice, type) VALUES (:numero, :codebare, :nom, :quant, :valeur, :date, :benefice, :type)");
         $sql->bindValue(':numero', $numero);
         $sql->bindValue(':codebare', $codebare);
         $sql->bindValue(':nom', $nom);
@@ -69,6 +70,7 @@ if (isset($_POST['facturer'])) {
         $sql->bindValue(':valeur', $valeur);
         $sql->bindValue(':date', $date);
         $sql->bindValue(':benefice', $benefice);
+        $sql->bindValue(':type', $type);
         $sql->execute();
 
         //calcule total prix
