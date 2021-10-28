@@ -173,6 +173,12 @@ include('classes/Mysql.php');
 
                         $sql->execute();
                         $produtos = $sql->fetchAll();
+                        if (!isset($_GET['true_total'])) {
+                            $true_total = $total;
+                        }else {
+                            $true_total = $_GET['true_total'];
+                        }
+                        
                         ?>
 
 
@@ -183,7 +189,7 @@ include('classes/Mysql.php');
                                     <h2>Ventes d'aujourd'hui</h2>
                                 </div>
                                 <div class="col-sm-5" style="margin-top: 35px;">
-                                    <a class="btn btn-primary" href="sales-details.php"><i class="fa fa-refresh"></i> Détailler</a>
+                                    <a class="btn btn-primary" href="sales-details.php?total=<?=$true_total;?>"><i class="fa fa-refresh"></i> Détailler</a>
                                     <a class="btn btn-default" href="sales.php"><i class="fa fa-refresh"></i> Voir tous</a>
                                 </div>
 
@@ -196,28 +202,31 @@ include('classes/Mysql.php');
                                     </td>
                                     <td><input type="text" name="total" value="<?= number_format($total, 2) . ' Ar'; ?>" disabled id="total"></td>
                                     <form action="#" method="get">
-                                        <td>
-                                            <?php
-                                            $sql = $db->prepare("SELECT type FROM `tb_produit_vendu` WHERE date = '$date'");
-                                            $sql->execute();
-                                            $reg = $sql->fetchAll();
-                                            $reg = array_unique(array_column($reg, 'type'));
-
-                                            ?>
-                                            <select name="type" size="1" style="margin:0 10px 0 20px; height: 40px; border: 2px solid #1D62F0;">
-                                                <?php foreach ($reg as $value) { ?>
-                                                    <option value="<?php echo $value?>">
-                                                        <?php echo $value; ?>
-                                                    </option>
+                                        <div align="right">
+                                            <td>
                                                 <?php
-                                                }
-                                                ?>
+                                                $sql = $db->prepare("SELECT type FROM `tb_produit_vendu` WHERE date = '$date'");
+                                                $sql->execute();
+                                                $reg = $sql->fetchAll();
+                                                $reg = array_unique(array_column($reg, 'type'));
 
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary" type="submit">🔍</button>
-                                        </td>
+                                                ?>
+                                                <select name="type" size="1" style="margin:0 10px 0 20px; height: 40px; border: 2px solid #1D62F0;">
+                                                    <?php foreach ($reg as $value) { ?>
+                                                        <option value="<?php echo $value ?>">
+                                                            <?php echo $value; ?>
+                                                        </option>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </select>
+                                                <input type="hidden" name="true_total" value="<?=$true_total;?>">
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary" type="submit">🔍</button>
+                                            </td>
+                                        </div>
                                     </form>
 
                                 </table>
