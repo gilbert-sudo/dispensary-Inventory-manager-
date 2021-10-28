@@ -202,19 +202,14 @@ include('classes/Mysql.php');
                                             $sql->execute();
                                             $reg = $sql->fetchAll();
                                             $reg = array_unique(array_column($reg, 'type'));
-                                            $a = count($reg);
-                                            $cont = 0;
+
                                             ?>
                                             <select name="type" size="1" style="margin:0 10px 0 20px; height: 40px; border: 2px solid #1D62F0;">
-                                                <?php while ($cont <= $a) {
-                                                    while (!isset($reg[$cont])) {
-                                                        $cont++;
-                                                    }
-                                                ?>
-                                                    <option value="<?php echo $reg[$cont]; ?>">
-                                                        <?php echo $reg[$cont]; ?>
+                                                <?php foreach ($reg as $value) { ?>
+                                                    <option value="<?php echo $value?>">
+                                                        <?php echo $value; ?>
                                                     </option>
-                                                <?php $cont++;
+                                                <?php
                                                 }
                                                 ?>
 

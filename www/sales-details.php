@@ -1,6 +1,11 @@
 <?php
 session_start();
 include('classes/Mysql.php');
+$date = date('m/d/y');
+$date2 = date_parse("$date");
+$jour = $date2['day'];
+$mois = $date2['month'];
+$annee = $date2['year'];
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -108,40 +113,44 @@ include('classes/Mysql.php');
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <?php
-                        $date = date('m/d/y');
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
-
-                        $sql->execute();
-                        $totals = $sql->fetchAll();
-                        $total = 0;
-                        $totalQuant = array_column($totals, 'quant');
-                        $totalnbr = count(array_column($totals, 'quant'));
-                        $totalPrice = array_column($totals, 'valeur');
-                        for ($i = 0; $i < $totalnbr; $i++) {
-                            $total2 = intval($totalQuant[$i]) * intval($totalPrice[$i]);
-                            $total = $total + $total2;
-                        }
-
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
-
-                        $sql->execute();
-                        $andranas = $sql->fetchAll();
-                        $andranas = array_column($andranas, 'date');
-                        $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date'");
-                        $sql->execute();
-                        $produtos = $sql->fetchAll();
-                        ?>
-
-
                         <div class="lista-cliente">
-
-                            <div id="top" class="row">
-                                <div class="col-sm-7">
-                                    <h2>Ventes d'aujourd'hui</h2>
+                            <div class="col-sm-7"></div>
+                                <div class="col-sm-5">
+                                    <h5>Les ventes du <?= $jour . "/" . $mois . "/" . $annee ?></h5>
                                 </div>
-                            </div>
+                            <?php
+                            $sql = $db->prepare("SELECT type FROM `tb_produit_vendu` WHERE date = '$date'");
+                            $sql->execute();
+                            $reg = $sql->fetchAll();
+                            $reg = array_unique(array_column($reg, 'type'));
+                        
+                            foreach ($reg as $value2) {
+                               
+                                $types = strtoupper($value2);
+                           echo "<h4>$types</h4>";
 
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' AND type = '$value2'");
+
+                            $sql->execute();
+                            $totals = $sql->fetchAll();
+                            $total = 0;
+                            $totalQuant = array_column($totals, 'quant');
+                            $totalnbr = count(array_column($totals, 'quant'));
+                            $totalPrice = array_column($totals, 'valeur');
+                            for ($i = 0; $i < $totalnbr; $i++) {
+                                $total2 = intval($totalQuant[$i]) * intval($totalPrice[$i]);
+                                $total = $total + $total2;
+                            }
+
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' AND type = '$value2'");
+
+                            $sql->execute();
+                            $andranas = $sql->fetchAll();
+                            $andranas = array_column($andranas, 'date');
+                            $sql = $db->prepare("SELECT * FROM `tb_produit_vendu` WHERE date = '$date' AND type = '$value2'");
+                            $sql->execute();
+                            $produtos = $sql->fetchAll();
+                            ?>
                             <div class="row">
                                 <table style="position: absolute; margin-left:20px;">
                                     <td>
@@ -174,7 +183,7 @@ include('classes/Mysql.php');
                                                     <td><?php echo $value['quant'] ?></td>
                                                     <td><?php echo $value['valeur'] ?></td>
                                                     <td><?php echo ($value['valeur'] * $value['quant']) ?></td>
-                                                   
+
                                             </tr>
                                         <?php
                                                 endforeach;
@@ -184,87 +193,10 @@ include('classes/Mysql.php');
                                 </div>
 
                             </div>
-                            <div class="row">
-                                <table style="position: absolute; margin-left:20px;">
-                                    <td>
-                                        <h4 id="total1">Total ventes:</h4>
-                                    </td>
-                                    <td><input type="text" name="total" value="<?= number_format($total, 2) . ' Ar'; ?>" disabled id="total"></td>
+                            <?php
+                            }
+                            ?>
 
-                                </table>
-                            </div>
-                            <div id="list" class="row">
-
-                                <div class="table-responsive col-md-12">
-                                    <table class="table table-striped" cellspacing="0" cellpadding="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Description</th>
-                                                <th>Quantité</th>
-                                                <th>p.u</th>
-                                                <th>prix</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <?php foreach ($produtos as $value) : ?>
-                                                    <td><?php echo $value['id'] ?></td>
-                                                    <td><?php echo $value['nom'] ?></td>
-                                                    <td><?php echo $value['quant'] ?></td>
-                                                    <td><?php echo $value['valeur'] ?></td>
-                                                    <td><?php echo ($value['valeur'] * $value['quant']) ?></td>
-                                                    
-                                            </tr>
-                                        <?php
-                                                endforeach;
-                                        ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <table style="position: absolute; margin-left:20px;">
-                                    <td>
-                                        <h4 id="total1">Total ventes:</h4>
-                                    </td>
-                                    <td><input type="text" name="total" value="<?= number_format($total, 2) . ' Ar'; ?>" disabled id="total"></td>
-
-                                </table>
-                            </div>
-                            <div id="list" class="row">
-
-                                <div class="table-responsive col-md-12">
-                                    <table class="table table-striped" cellspacing="0" cellpadding="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Description</th>
-                                                <th>Quantité</th>
-                                                <th>p.u</th>
-                                                <th>prix</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <?php foreach ($produtos as $value) : ?>
-                                                    <td><?php echo $value['id'] ?></td>
-                                                    <td><?php echo $value['nom'] ?></td>
-                                                    <td><?php echo $value['quant'] ?></td>
-                                                    <td><?php echo $value['valeur'] ?></td>
-                                                    <td><?php echo ($value['valeur'] * $value['quant']) ?></td>
-                                            </tr>
-                                        <?php
-                                                endforeach;
-                                        ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>
