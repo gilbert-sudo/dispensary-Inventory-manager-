@@ -67,9 +67,7 @@ include('classes/Mysql.php');
                 </div>
 
                 <ul class="nav">
-                    <li <?php if (!isset($_GET['pg'])) {
-                            print 'class="active"';
-                        } ?>>
+                    <li class="active">
                         <a href="#">
                             <i class="pe-7s-cart"></i>
                             <p>Ventes</p>
@@ -185,7 +183,7 @@ include('classes/Mysql.php');
                                     <h2>Ventes d'aujourd'hui</h2>
                                 </div>
                                 <div class="col-sm-5" style="margin-top: 35px;">
-                                    <a class="btn btn-primary" href="sales.php"><i class="fa fa-refresh"></i> Imprimer</a>
+                                    <a class="btn btn-primary" href="sales-details.php"><i class="fa fa-refresh"></i> Détailler</a>
                                     <a class="btn btn-default" href="sales.php"><i class="fa fa-refresh"></i> Voir tous</a>
                                 </div>
 
@@ -208,11 +206,11 @@ include('classes/Mysql.php');
                                             $cont = 0;
                                             ?>
                                             <select name="type" size="1" style="margin:0 10px 0 20px; height: 40px; border: 2px solid #1D62F0;">
-                                                <?php while ($cont < $a) { 
-                                                     while (!isset($reg[$cont])) {
+                                                <?php while ($cont <= $a) {
+                                                    while (!isset($reg[$cont])) {
                                                         $cont++;
                                                     }
-                                                    ?>
+                                                ?>
                                                     <option value="<?php echo $reg[$cont]; ?>">
                                                         <?php echo $reg[$cont]; ?>
                                                     </option>
