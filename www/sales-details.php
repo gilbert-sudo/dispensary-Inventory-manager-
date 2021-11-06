@@ -78,6 +78,12 @@ $annee = $date2['year'];
                             <p>Ventes</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="invoices.php">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Factures</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

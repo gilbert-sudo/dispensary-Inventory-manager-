@@ -76,7 +76,7 @@ include('classes/Mysql.php');
                     <li class="active">
                         <a href="#">
                             <i class="pe-7s-news-paper"></i>
-                            <p>Ventes</p>
+                            <p>Factures</p>
                         </a>
                     </li>
                 </ul>
@@ -161,12 +161,12 @@ include('classes/Mysql.php');
                         <div class="lista-cliente">
 
                             <div id="top" class="row">
-                                <div class="col-sm-7">
+                                <div class="col-sm-6">
                                     <h2>Les factures</h2>
                                 </div>
-                                <div class="col-sm-5" style="margin-top: 35px;">
-                                    <a class="btn btn-primary" href="sales-details.php"><i class="fa fa-refresh"></i> Détailler</a>
-                                    <a class="btn btn-default" href="sales.php"><i class="fa fa-refresh"></i> Voir tous</a>
+                                <div class="col-sm-6" style="margin-top: 35px;">
+                                    <a class="btn btn-primary" href="#"><i class="fa fa-refresh"></i> Détailler</a>
+                                    <a class="btn btn-default" href="sales.php"><i class="fa fa-refresh"></i> Aujourd'hui</a>
                                 </div>
 
                             </div>
@@ -210,11 +210,11 @@ include('classes/Mysql.php');
                                                 <?php foreach ($produtos as $value) : ?>
                                                     <td><?php echo $value['id'] ?></td>
                                                     <td><?php echo $value['n_NotaFiscal'] ?></td>
-                                                    <td><?php echo $value['vendeur'] ?></td>
+                                                    <td><?php echo $value['client'] ?></td>
                                                     <td><?php echo $value['vendeur'] ?></td>
                                                     <td><?php echo ($value['prix']) ?></td>
                                                     <td class="actions">
-                                                        <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
+                                                        <a class="btn btn-success btn-xs" href="invoice-detail.php?client=<?=$value['client']?>&vendeur=<?=$value['vendeur']?>&total=<?=($value['prix'])?>&numero=<?=($value['n_NotaFiscal'])?>">Regarder</a>
                                                     </td>
                                             </tr>
                                         <?php

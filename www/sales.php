@@ -76,7 +76,7 @@ include('classes/Mysql.php');
                     <li>
                         <a href="invoices.php">
                             <i class="pe-7s-news-paper"></i>
-                            <p>Ventes</p>
+                            <p>Factures</p>
                         </a>
                     </li>
                 </ul>
@@ -262,7 +262,7 @@ include('classes/Mysql.php');
                                                     <td><?php echo $value['valeur'] ?></td>
                                                     <td><?php echo ($value['valeur'] * $value['quant']) ?></td>
                                                     <td class="actions">
-                                                        <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>">Regarder</a>
+                                                        <a class="btn btn-success btn-xs" href="#">Regarder</a>
                                                     </td>
                                             </tr>
                                         <?php

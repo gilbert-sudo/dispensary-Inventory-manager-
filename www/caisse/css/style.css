@@ -390,6 +390,7 @@ button{
 .client1{
     width: 168px;
     height: 37px;
+    padding-left: 10px;
     margin-left: 137px;
 }
 .total{
