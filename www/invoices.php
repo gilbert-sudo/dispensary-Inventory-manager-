@@ -215,6 +215,7 @@ include('classes/Mysql.php');
                                                     <td><?php echo ($value['prix']) ?></td>
                                                     <td class="actions">
                                                         <a class="btn btn-success btn-xs" href="invoice-detail.php?client=<?=$value['client']?>&vendeur=<?=$value['vendeur']?>&total=<?=($value['prix'])?>&numero=<?=($value['n_NotaFiscal'])?>">Regarder</a>
+                                                        <a class="btn btn-danger btn-xs" href="invoice-cancel.php?client=<?=$value['client']?>&vendeur=<?=$value['vendeur']?>&total=<?=($value['prix'])?>&numero=<?=($value['n_NotaFiscal'])?>">Annuler</a>
                                                     </td>
                                             </tr>
                                         <?php

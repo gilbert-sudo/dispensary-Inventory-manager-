@@ -82,13 +82,13 @@ $row = $mysql->fetch();
                 </div>
 
                 <ul class="nav">
-                    <li class="active">
+                    <li>
                         <a href="sales.php">
                             <i class="pe-7s-cart"></i>
                             <p>Ventes</p>
                         </a>
                     </li>
-                    <li>
+                    <li  class="active">
                         <a href="invoices.php">
                             <i class="pe-7s-news-paper"></i>
                             <p>Factures</p>
