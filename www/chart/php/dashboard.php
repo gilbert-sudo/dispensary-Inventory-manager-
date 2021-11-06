@@ -8,45 +8,46 @@ $fetch_benefice->execute();
 $fetch_benefice = $fetch_benefice->fetchAll();
 if ($fetch_benefice != []) {
     $benefice = array_sum(array_column($fetch_benefice, 'benefice'));
+    $c_a = array_sum(array_column($fetch_benefice, 'prix'));
     $an = implode(array_unique(array_column($fetch_benefice, 'an')));
     $mois = implode(array_unique(array_column($fetch_benefice, 'mois')));
 
     switch ($mois) {
         case ('1'):
-            $mois = 'JAN';
+            $mois = 'Jan';
             break;
         case ('2'):
-            $mois = 'FEV';
+            $mois = 'Fev';
             break;
         case ('3'):
-            $mois = 'MAR';
+            $mois = 'Mar';
             break;
         case ('4'):
-            $mois = 'AVR';
+            $mois = 'Avr';
             break;
         case ('5'):
-            $mois = 'MAI';
+            $mois = 'Mai';
             break;
         case ('6'):
-            $mois = 'JUI';
+            $mois = 'Jui';
             break;
         case ('7'):
-            $mois = 'JUL';
+            $mois = 'Jul';
             break;
         case ('8'):
-            $mois = 'AOU';
+            $mois = 'Aou';
             break;
         case ('9'):
-            $mois = 'SEP';
+            $mois = 'Sep';
             break;
         case ('10'):
-            $mois = 'OCT';
+            $mois = 'Oct';
             break;
         case ('11'):
-            $mois = 'NOV';
+            $mois = 'Nov';
             break;
         case ('12'):
-            $mois = 'DEC';
+            $mois = 'Dec';
             break;
         default:
             $mois = '...';
@@ -56,12 +57,15 @@ if ($fetch_benefice != []) {
     $row_existe->execute();
     $row_existe = $row_existe->fetch();
     if ($row_existe === false) {
-        $insert_to_rapport = $db->prepare("INSERT INTO tb_rapport_finance VALUES (null,?,?,?)");
-        $insert_to_rapport->execute(array($benefice, $mois, $an));
+        $insert_to_rapport = $db->prepare("INSERT INTO tb_rapport_finance VALUES (null,?,?,?,?)");
+        $insert_to_rapport->execute(array($benefice, $mois, $an, $c_a));
     } else {
         $insert_to_rapport = $db->prepare("UPDATE tb_rapport_finance SET benefice = ? WHERE mois = '$mois' AND an = '$an'");
         $benefice_new = $benefice + $row_existe['benefice'];
         $insert_to_rapport->execute(array($benefice_new));
+        $insert_to_rapport = $db->prepare("UPDATE tb_rapport_finance SET ca = ? WHERE mois = '$mois' AND an = '$an'");
+        $c_a_new = $c_a + $row_existe['ca'];
+        $insert_to_rapport->execute(array($c_a_new));
     }
     $update_states = $db->prepare("UPDATE tb_ventes SET states = 0 WHERE states = 1");
     $update_states->execute();

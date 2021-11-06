@@ -1,6 +1,9 @@
 <?php
 include('classes/Mysql.php');
 $id = $_GET['id'];
+if (isset($_GET['page'])) {
+    $currentPage = $_GET['page'];
+}
 
 if (isset($_POST['ajouter'])) {
     $new_quant = $_POST['quantity'];
@@ -31,7 +34,7 @@ if (isset($_POST['ajouter_pro'])) {
     $program_stock->execute(array($id, $quant, $admin, date('m/d/y')));
     // ======================END UPDATE PROGRAMMED-ADD-STOCK============================
 }
-$sql = $db->prepare("SELECT * FROM `tb_produtos` where id=$id");
+$sql = $db->prepare("SELECT * FROM `tb_produtos` where id = $id");
 $sql->execute();
 $produto = $sql->fetch();
 
@@ -93,9 +96,9 @@ $nbr_row = count($nbr_add);
 <hr />
 <div id="actions" class="row">
     <div class="col-md-12">
-        <a href="?pg=produtos" class="btn btn-danger">Fermer</a>
+        <a href="?pg=produtos&page=<?=$currentPage?>" class="btn btn-danger">Retour</a>
         <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
-            <a href="?pg=editar-produto&id=<?php echo $produto['id'] ?>" class="btn btn-dark">Editer</a>
+            <a href="?pg=editar-produto&id=<?php echo $produto['id'] ?>&page=<?=$currentPage?>" class="btn btn-dark">Editer</a>
         <?php endif; ?>
         <a href="?pg=quick-add&id=<?php echo $produto['id'] ?>" class="btn btn-primary">En ajouter</a>
         <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>

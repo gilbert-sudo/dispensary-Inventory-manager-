@@ -89,7 +89,7 @@ $clientes = $sql->fetchAll();
                     <tr>
                         <th>ID</th>
                         <th>Nom</th>
-                        <th>Cpf</th>
+                        <th>Numéro</th>
                         <th>Quartier</th>
                         <th class="actions">Actions</th>
                     </tr>

@@ -5,21 +5,26 @@
 
         <div class="col-md-2" style="margin-top: 100px;margin-left: 50px">
             <label>
-              <a href="?pg=backup"><button  style="width: 65px;height: 43px"><i class="pe-7s-server"></i> </button></a>
+              <a href="?pg=backup"><button  style="width: 65px;height: 43px"><i>💾</i> </button></a>
                 <p>BACK-UP</p></label>
         </div>
 
         <div class="col-md-2" style="margin-top: 100px">
             <label>
-                    <a href="#"><button  style="width: 65px;height: 43px"><i class="pe-7s-note"></i> </button></a>
+                    <a href="#"><button  style="width: 65px;height: 43px"><i>📆</i> </button></a>
                 <p>RAPPEL</p>
                 </label>
         </div>
         
         <div class="col-md-2" style="margin-top: 100px;">
             <label>
-              <a href="?pg=pro-add"><button  style="width: 65px;height: 43px"><i class="pe-7s-server"></i> </button></a>
+              <a href="?pg=pro-add"><button  style="width: 65px;height: 43px"><i>💊</i> </button></a>
                 <p>PRODUITS</p></label>
+        </div>
+         <div class="col-md-2" style="margin-top: 100px;">
+            <label>
+              <a href="?pg=inventory"><button  style="width: 65px;height: 43px"><i>📃</i> </button></a>
+                <p>INVENTAIRE</p></label>
         </div>
 
 

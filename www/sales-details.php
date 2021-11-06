@@ -114,7 +114,7 @@ $annee = $date2['year'];
                 <div class="container-fluid">
                     <div class="row">
                         <div class="lista-cliente">
-                            <h5 style="text-align:right;"><?= $jour . "/" . $mois . "/" . $annee ?></h5>
+                            <h5 style="text-align:right;">Ventes le <?= $jour . "/" . $mois . "/" . $annee ?></h5>
                             <?php
                             $sql = $db->prepare("SELECT type FROM `tb_produit_vendu` WHERE date = '$date'");
                             $sql->execute();
@@ -157,9 +157,9 @@ $annee = $date2['year'];
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Description</th>
-                                                    <th>Quantité</th>
-                                                    <th>p.u</th>
-                                                    <th>prix</th>
+                                                    <th style="text-align:right">Quantité</th>
+                                                    <th style="text-align:right">p.u</th>
+                                                    <th style="text-align:right">prix</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -168,9 +168,9 @@ $annee = $date2['year'];
                                                     <?php foreach ($produtos as $value) : ?>
                                                         <td><?php echo $value['id'] ?></td>
                                                         <td style="min-width: 300px;"><?php echo $value['nom'] ?></td>
-                                                        <td><?php echo $value['quant'] ?></td>
-                                                        <td><?php echo $value['valeur'] ?></td>
-                                                        <td><?php echo ($value['valeur'] * $value['quant']) ?></td>
+                                                        <td style="text-align:right"><?php echo $value['quant'] ?></td>
+                                                        <td style="text-align:right"><?php echo $value['valeur'] ?></td>
+                                                        <td style="text-align:right"><?php echo ($value['valeur'] * $value['quant']) ?></td>
 
                                                 </tr>
                                             <?php endforeach;?>
@@ -178,8 +178,8 @@ $annee = $date2['year'];
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td><strong>Total</strong></td>
-                                                        <td><strong><?php echo $total; ?></strong></td>
+                                                        <td style="text-align:right"><strong>Total</strong></td>
+                                                        <td style="text-align:right"><strong><?php echo $total; ?></strong></td>
 
                                                 </tr>
                                             </tbody>

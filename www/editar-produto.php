@@ -2,6 +2,10 @@
 include('classes/Mysql.php');
 
 $id = $_GET['id'];
+if (isset($_GET['page'])) {
+    $currentPage = $_GET['page'];
+}
+
 $sql = $db->prepare("SELECT * FROM `tb_produtos` where id=$id");
 $sql->execute();
 $produto = $sql->fetch();
@@ -11,7 +15,7 @@ $produto = $sql->fetch();
 ?>
 <div class="cadastro-cliente">
     <h3 class="page-header">Editer un produit</h3>
-    <form class="form-cliente" method="post" enctype="multipart/form-data" action="?pg=produtos&id=<?= $id ?>">
+    <form class="form-cliente" method="post" enctype="multipart/form-data" action="?pg=produtos&id=<?=$id?>&page=<?=$currentPage?>">
 
         <div class="row">
             <div class="form-group col-md-6">
@@ -79,7 +83,7 @@ $produto = $sql->fetch();
         <div class="row">
             <div class="col-md-12">
                 <button type="submit" name="acao" class="btn btn-primary">Sauvegarder</button>
-                <a href="?pg=produtos" class="btn btn-default">Annuler</a>
+                <a href="?pg=produtos&page=<?=$currentPage?>" class="btn btn-default">Annuler</a>
             </div>
         </div>
 

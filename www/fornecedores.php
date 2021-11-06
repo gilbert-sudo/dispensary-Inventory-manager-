@@ -5,6 +5,35 @@ if (isset( $_GET['deletar'] )) {
 
     $db->exec( "DELETE FROM `tb_fornecedores` WHERE id = $id" );
 }
+if (isset($_POST['enregistrer'])) {
+    $id = $_GET['id'];
+    $nome = $_POST['nome'];
+    $cnpj = $_POST['cpf'];
+    $inscricao = $_POST['inscricao'];
+    $endereco = $_POST['endereco'];
+    $numero = $_POST['numero'];
+    $bairro = "non définie";
+    $cidade = $_POST['cidade'];
+    $cep = "non définie";
+    $uf = $_POST['uf'];
+    $telefone = $_POST['telefone'];
+    $email = $_POST['email'];
+
+    $sql = $db->prepare("UPDATE tb_fornecedores SET nome = :nome, cnpj = :cnpj, inscricao = :inscricao, endereco = endereco, numero = :numero, bairro = :bairro, cidade = :cidade, cep = :cep, uf = :uf, telefone = :telefone, email = :email  WHERE id = :id");
+    $sql->bindValue(':nome', $nome);
+    $sql->bindValue(':cnpj', $cnpj);
+    $sql->bindValue(':inscricao', $inscricao);
+    $sql->bindValue(':endereco', $endereco);
+    $sql->bindValue(':numero', $numero);
+    $sql->bindValue(':bairro', $bairro);
+    $sql->bindValue(':cidade', $cidade);
+    $sql->bindValue(':cep', $cep);
+    $sql->bindValue(':uf', $uf);
+    $sql->bindValue(':telefone', $telefone);
+    $sql->bindValue(':email', $email);
+    $sql->bindValue(':id', $id);
+    $sql->execute();
+}
 ?>
 <?php
 $sql=$db->prepare("SELECT * FROM `tb_fornecedores`");
@@ -52,7 +81,8 @@ $fornecedores= $sql->fetchAll();
                     <td><?php echo $value['cidade']?></td>
                     <td class="actions">
                         <a class="btn btn-success btn-xs" href="?pg=visualizar-fornecedor&id=<?php echo $value['id']; ?>">Regarder</a>
-                        <a class="btn btn-danger btn-xs"  href="?pg=fornecedores&deletar=<?php echo $value['id']; ?>">Effacer</a>
+                        <a class="btn btn-warning btn-xs" href="?pg=editar-fornecedor&id=<?php echo $value['id']; ?> " style="background-color: white;" >Editer</a>
+                        <a class="btn btn-danger btn-xs" onclick="return window.confirm('Voulez-vous vraiment supprimer ce fournisseur ?');" href="?pg=fornecedores&deletar=<?php echo $value['id']; ?>">Effacer</a>
                     </td>
                 </tr>
 

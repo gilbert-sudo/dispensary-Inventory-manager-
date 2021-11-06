@@ -84,21 +84,23 @@ $produtos = $sql->fetchAll();
                     <tr>
                         <th>Code</th>
                         <th>Description</th>
-                        <th>Quantité</th>
-                        <th class="actions">Action</th>
+                        <th style="text-align: center;">Quantité</th>
+                        <th style="text-align: center;">Prix</th>
+                        <th class="actions" style="text-align: center;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <tr>
                         <?php foreach ($produtos as $value) : ?>
-                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['codInterno'] ?></td>
-                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['descricao'] ?></td>
-                            <td <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['quantidade'] ?></td>
-                            <td class="actions" <?php if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> >
-                                <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?php echo $value['id']; ?>" style="background-color: white;" >Regarder</a>
+                            <td <?php if ($value['benefice'] < 0) {echo 'style="background-color: red;color: white;"';} if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;"';} ?> ><?php echo $value['codInterno'] ?></td>
+                            <td <?php if ($value['benefice'] < 0) {echo 'style="background-color: red;color: white;max-width: 300px;overflow:hidden;"';} if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;max-width: 300px;overflow:hidden;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;max-width: 300px;overflow:hidden;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;max-width: 300px;overflow:hidden;"';} ?> style="max-width: 300px;overflow:hidden;" ><?php echo $value['descricao'] ?></td>
+                            <td <?php if ($value['benefice'] < 0) {echo 'style="background-color: red;color: white;text-align: center;"';} if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;text-align: center;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;text-align: center;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;text-align: center;"';} ?> style="text-align: center;"><?php echo $value['quantidade'] ?></td>
+                            <td <?php if ($value['benefice'] < 0) {echo 'style="background-color: red;color: white;text-align:end;"';} if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;text-align:end;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;text-align:end;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;text-align:end;"';} ?> style="text-align:end;"><?php echo $value['venda']." Ar" ?></td>
+                            <td class="actions" <?php if ($value['benefice'] < 0) {echo 'style="background-color: red;color: white;text-align: center;"';} if ($value['quantidade'] == 0) {echo 'style="background-color: #f8d7da;color: #721c24;text-align: center;"';} if ($value['codBarras'] == 1) {echo 'style="background-color: #6bddbb;color: black;text-align: center;"';} if ($value['custo'] == $value['venda']) {echo 'style="background-color: #fff3cd;color: #856404;text-align: center;"';} ?> style="text-align: center;">
+                                <a class="btn btn-success btn-xs" href="?pg=visualizar-produto&id=<?=$value['id']?>&page=<?=$currentPage?>" style="background-color: white;" >Regarder</a>
                                 <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
-                                    <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?php echo $value['id']; ?> " style="background-color: white;" >Editer</a>
+                                    <a class="btn btn-warning btn-xs" href="?pg=editar-produto&id=<?=$value['id']?>&page=<?=$currentPage?>" style="background-color: white;" >Editer</a>
                                     <a onclick="return window.confirm('Voulez-vous vraiment supprimer ce produit ?');" class="btn btn-danger btn-xs" href="?pg=produtos&deletar=<?php echo $value['id']; ?>" style="background-color: white;">Effacer</a>
                                 <?php endif; ?>
                             </td>

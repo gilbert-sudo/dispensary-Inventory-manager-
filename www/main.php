@@ -166,7 +166,7 @@ $finalcode = createRandomPassword();
                             </a>
                         </li>
                         <li <?php if (isset($_GET['pg'])) {
-                                if ($_GET['pg'] == "extras") {
+                                if ($_GET['pg'] == "extras" || $_GET['pg'] == "inventory") {
                                     print 'class="active"';
                                 }
                             } ?>>

@@ -10,16 +10,20 @@ $resul = $result->fetchAll();
 
 foreach ($resul as $res) {
     $benefice[] = $res['benefice'];
+    $c_a[] = $res['ca'];
     $mois[] = $res['mois'];
 }
-if (isset($mois) && isset($benefice)) {
+if (isset($mois) && isset($c_a) && isset($benefice)) {
     $label = json_encode($mois);
     $series1 = json_encode($benefice);
+    $series2 = json_encode($c_a);
 } else {
     $mois = [];
     $benefice = [];
+    $c_a = [];
     $label = json_encode($mois);
     $series1 = json_encode($benefice);
+    $series2 = json_encode($c_a);
 }
 
 
@@ -282,7 +286,8 @@ $profil = $sql->fetch();
         var data = {
             labels: <?= $label ?>,
             series: [
-                <?= $series1 ?>,
+                <?= $series1 ?>, 
+                <?= $series2 ?>
             ]
         };
 
