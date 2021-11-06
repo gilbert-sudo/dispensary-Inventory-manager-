@@ -73,6 +73,12 @@ include('classes/Mysql.php');
                             <p>Ventes</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="invoices.php">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Ventes</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
