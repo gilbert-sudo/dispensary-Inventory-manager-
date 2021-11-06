@@ -70,6 +70,11 @@ if ($fetch_benefice != []) {
     $update_states = $db->prepare("UPDATE tb_ventes SET states = 0 WHERE states = 1");
     $update_states->execute();
 }
-header('location: ../dashboard.php');
+if (isset($_GET['invoice_redir'])) {
+    header('location: ../../invoices.php');
+}else{
+    header('location: ../dashboard.php');
+}
+
 // ====================================REFRECH DATA===========================
 

@@ -138,7 +138,7 @@ $row = $mysql->fetch();
                             </div>
                             <br>
                             <div align="center">
-                                <a class="btn btn-danger" href="php/invoice-cancel.php">OUI 👍</a>
+                                <a class="btn btn-danger" href="php/invoice-cancel.php?numero=<?= $numero ?>">OUI 👍</a>
                                 <a class="btn btn-primary" href="invoices.php">NON 👎</a>
                             </div>
                             <br>

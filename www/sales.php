@@ -74,7 +74,7 @@ include('classes/Mysql.php');
                         </a>
                     </li>
                     <li>
-                        <a href="invoices.php">
+                        <a href="chart/php/dashboard.php?invoice_redir=true">
                             <i class="pe-7s-news-paper"></i>
                             <p>Factures</p>
                         </a>
