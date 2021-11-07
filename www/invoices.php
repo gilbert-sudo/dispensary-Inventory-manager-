@@ -161,12 +161,11 @@ include('classes/Mysql.php');
                         <div class="lista-cliente">
 
                             <div id="top" class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-8">
                                     <h2>Les factures</h2>
                                 </div>
-                                <div class="col-sm-6" style="margin-top: 35px;">
-                                    <a class="btn btn-primary" href="#"><i class="fa fa-refresh"></i> Détailler</a>
-                                    <a class="btn btn-default" href="sales.php"><i class="fa fa-refresh"></i> Aujourd'hui</a>
+                                <div class="col-sm-4" style="margin-top: 35px;">
+                                    <a class="btn btn-default" href="invoices.php"><i class="fa fa-refresh"></i> Aujourd'hui</a>
                                 </div>
 
                             </div>

@@ -131,7 +131,7 @@ $row = $mysql->fetch();
                     <div class="row">
                         <div class="lista-cliente">
                             <h5 style="text-align:right;">Le <?= $jour . "/" . $mois . "/" . $annee ?></h5>
-                            <h5>RNPM: <?=$row['name']?></h5>
+                            <h5><?=$row['name']?></h5>
                             <h5>RNPM: <?=$row['cnpj']?></h5>
                             <h5><?=$row['Adresse']?></h5>
                             <h5>Téléphone: <?=$row['telephone']?></h5>

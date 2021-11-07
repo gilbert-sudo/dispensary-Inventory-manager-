@@ -76,8 +76,8 @@ $rapport = $sql->fetch();
 $old_benefice = $rapport['benefice'];
 $old_ca = $rapport['ca'];
 // update tb_rapport_finance
-$new_benefice = $old_benefice - $rapport['benefice'];
-$new_ca = $old_ca - $rapport['ca'];
+$new_benefice = $old_benefice - $vente['benefice'];
+$new_ca = $old_ca - $vente['prix'];
 $sql = $db->prepare("UPDATE `tb_rapport_finance` SET benefice = $new_benefice, ca = $new_ca WHERE mois = '$month' AND an = '$year'");
 $sql->execute();
 // end update tb_rapport_finance
