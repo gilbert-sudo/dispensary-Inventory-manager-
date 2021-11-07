@@ -1792,7 +1792,7 @@ fieldset[disabled] .form-control {
     padding-bottom: 5px;
     border-top: none !important;
     border-bottom: none;
-    text-align: left !important;
+    text-align: left;
 }
 
 .table .td-actions .btn {

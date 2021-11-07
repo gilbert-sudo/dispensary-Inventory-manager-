@@ -160,8 +160,17 @@ $profil = $sql->fetch();
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="card-header ">
-                                <h4 class="card-title">Rapports des ventes</h4>
+                                <h4 class="card-title">Rapports d'activités</h4>
                                 <p class="card-category">Tous les produits sont hors Taxes</p>
+                                <!-- <input type="year"> -->
+                                <?php $years = range(2000, strftime("%Y", time())); ?>
+                                <select style="padding: 5px;">
+                                    <option><?= "20" . $year ?></option>
+                                    <?php foreach ($years as $year2) : ?>
+                                        <option value="<?php echo $year2; ?>"><?php echo $year2; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
                             </div>
                             <div class="card-body ">
                                 <div id="chartActivity" class="ct-chart"></div>
@@ -176,8 +185,42 @@ $profil = $sql->fetch();
                                     <i class="fa fa-check"></i> Data information certified ✅
                                 </div>
                             </div>
+
                         </div>
+                        <div class="container" align="center">
+                        <?php $total_benefice = array_sum(array_column($resul, 'benefice')); ?>
+                        <?php $total_ca = array_sum(array_column($resul, 'ca')); ?>
+                            <div class="table-responsive col-md-9">
+                                <table class="table table-striped" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">Mois</th>
+                                            <th style="text-align: center;">Bénefice</th>
+                                            <th style="text-align: center;">Chiffre d'affaire</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <?php foreach ($resul as $value) : ?>
+                                                <td style="text-align: center;"><?php echo $value['mois']; ?></td>
+                                                <td style="text-align: center;"><?php echo number_format($value['benefice'], 2); ?></td>
+                                                <td style="text-align: center;"><?php echo number_format($value['ca'], 2); ?></td>
+
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    <tr>
+                                        <td style="text-align: center;"><strong>Total</strong></td>
+                                        <td style="text-align: center;"><strong><?php echo number_format($total_benefice, 2)." Ar"; ?></strong></td>
+                                        <td style="text-align: center;"><strong><?php echo number_format($total_ca, 2)." Ar"; ?></stronca
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
+
 
                 </div>
             </div>
@@ -286,7 +329,7 @@ $profil = $sql->fetch();
         var data = {
             labels: <?= $label ?>,
             series: [
-                <?= $series1 ?>, 
+                <?= $series1 ?>,
                 <?= $series2 ?>
             ]
         };
