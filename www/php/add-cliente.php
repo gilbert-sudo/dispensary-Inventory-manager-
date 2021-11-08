@@ -49,7 +49,7 @@ if (isset($_POST['acao'])) {
             }
 
 
-            $sql = $db->prepare("INSERT INTO tb_clientes (cpf ,nome ,dataNascimento ,endereco ,numero ,bairro ,telefone ,celular ,email ,insciption_date ,mois ,an ,day) VALUES (:cpf ,:nome ,:dataNascimento ,:endereco ,:numero ,:bairro ,:telefone ,:celular ,:email ,:insciption_date ,:mois ,:an ,:day)");
+            $sql = $db->prepare("INSERT INTO tb_clientes (cpf ,nome ,dataNascimento ,endereco ,numero ,bairro ,telefone ,celular ,email ,insciption_date ,mois ,an) VALUES (:cpf ,:nome ,:dataNascimento ,:endereco ,:numero ,:bairro ,:telefone ,:celular ,:email ,:insciption_date ,:mois ,:an)");
             $sql->bindValue(':cpf', $cpf);
             $sql->bindValue(':nome', $nome);
             $sql->bindValue(':dataNascimento', $dataNascimento);
@@ -62,7 +62,6 @@ if (isset($_POST['acao'])) {
             $sql->bindValue(':insciption_date', $date);
             $sql->bindValue(':mois', $month);
             $sql->bindValue(':an', $year);
-            $sql->bindValue(':day', $day);
             $sql->execute();
             $success = 1;
             $errMess = "$nome a été bien ajouté en tant que client(e)✅";

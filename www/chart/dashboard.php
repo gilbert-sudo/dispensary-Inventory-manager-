@@ -2,8 +2,12 @@
 <?php
 require_once('../classes/connect.php');
 $db = connect('../pharmacie.db');
-
-$year = date('y');
+if (isset($_POST['year'])) {
+    $year = $_POST['year'];
+    $year = substr($year, 2);
+} else {
+    $year = date('y');
+}
 $result = $db->prepare("SELECT * FROM tb_rapport_finance WHERE an = $year");
 $result->execute();
 $resul = $result->fetchAll();
@@ -160,16 +164,21 @@ $profil = $sql->fetch();
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="card-header ">
-                                <h4 class="card-title">Rapports d'activités</h4>
+                                <div class="form-year" align="right">
+                                    <!-- <input type="year"> -->
+                                    <form action="#" method="post">
+                                        <?php $years = range(2020, strftime("%Y", time())); ?>
+                                        <select style="padding: 5px;" name="year" onchange="this.form.submit();">
+                                            <option><?= "20" . $year ?></option>
+                                            <?php foreach ($years as $year2) : ?>
+                                                <option value="<?php echo $year2; ?>"><?php echo $year2; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <noscript><input type="submit" value="Submit"></noscript>
+                                    </form>
+                                </div>
+                                <h4 class="card-title">Courbe de rendement </h4>
                                 <p class="card-category">Tous les produits sont hors Taxes</p>
-                                <!-- <input type="year"> -->
-                                <?php $years = range(2000, strftime("%Y", time())); ?>
-                                <select style="padding: 5px;">
-                                    <option><?= "20" . $year ?></option>
-                                    <?php foreach ($years as $year2) : ?>
-                                        <option value="<?php echo $year2; ?>"><?php echo $year2; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
 
                             </div>
                             <div class="card-body ">
@@ -188,32 +197,33 @@ $profil = $sql->fetch();
 
                         </div>
                         <div class="container" align="center">
-                        <?php $total_benefice = array_sum(array_column($resul, 'benefice')); ?>
-                        <?php $total_ca = array_sum(array_column($resul, 'ca')); ?>
-                            <div class="table-responsive col-md-9">
+                            <?php $total_benefice = array_sum(array_column($resul, 'benefice')); ?>
+                            <?php $total_ca = array_sum(array_column($resul, 'ca')); ?>
+                            <div class="card table-responsive col-md-9">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Rapports financiers </h4>
+                                    <p class="card-category">Bénéfice et chiffre d'affaire.</p>
+                                </div>
                                 <table class="table table-striped" cellspacing="0" cellpadding="0">
                                     <thead>
                                         <tr>
-                                            <th style="text-align: center;">Mois</th>
-                                            <th style="text-align: center;">Bénefice</th>
-                                            <th style="text-align: center;">Chiffre d'affaire</th>
+                                            <th>Mois</th>
+                                            <th>Bénefice</th>
+                                            <th>Chiffre d'affaire</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php foreach ($resul as $value) : ?>
+                                            <tr>
+                                                <td><?php echo $value['mois']; ?></td>
+                                                <td><?php echo number_format($value['benefice'], 2) . " Ar"; ?></td>
+                                                <td><?php echo number_format($value['ca'], 2) . " Ar"; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                         <tr>
-                                            <?php foreach ($resul as $value) : ?>
-                                                <td style="text-align: center;"><?php echo $value['mois']; ?></td>
-                                                <td style="text-align: center;"><?php echo number_format($value['benefice'], 2); ?></td>
-                                                <td style="text-align: center;"><?php echo number_format($value['ca'], 2); ?></td>
-
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td style="text-align: center;"><strong>Total</strong></td>
-                                        <td style="text-align: center;"><strong><?php echo number_format($total_benefice, 2)." Ar"; ?></strong></td>
-                                        <td style="text-align: center;"><strong><?php echo number_format($total_ca, 2)." Ar"; ?></stronca
-                                    </tr>
+                                            <td><strong>Total annuel</strong></td>
+                                            <td><strong><?php echo number_format($total_benefice, 2) . " Ar"; ?></strong></td>
+                                            <td><strong><?php echo number_format($total_ca, 2) . " Ar"; ?></stronca </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -222,6 +232,52 @@ $profil = $sql->fetch();
                     </div>
 
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container" align="center">
+                            <div class="card table-responsive col-md-9">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Rapports d'activités</h4>
+                                    <p class="card-category">Nombre de vente et des nouveaux clients.</p>
+                                </div>
+                                <table class="table table-striped" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Mois</th>
+                                            <th>Client</th>
+                                            <th>vente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $total_new_client = array_sum(array_column($resul, 'newClient')); ?>
+                                        <?php $total_countInv = array_sum(array_column($resul, 'countInv')); ?>
+                                        <?php foreach ($resul as $value) : ?>
+                                            <tr>
+                                                <td><?php echo $value['mois']; ?></td>
+                                                <td><?php echo "+ " . $value['newClient']; ?></td>
+                                                <td><?php echo "+ " . $value['countInv']; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        <tr>
+                                            <td><strong>Total annuel</strong></td>
+                                            <?php if ($total_new_client > 1) {
+                                                echo "<td><strong>+ " . $total_new_client . " Clients</strong></td>";
+                                            } else {
+                                                echo "<td><strong>+ " . $total_new_client . " Client</strong></td>";
+                                            }
+                                            if ($total_countInv > 1) {
+                                                echo "<td><strong>+ " . $total_countInv . " Ventes</strong></td>";
+                                            } else {
+                                                echo "<td><strong>+ " . $total_countInv . " Vente</strong></td>";
+                                            }
+                                            ?>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

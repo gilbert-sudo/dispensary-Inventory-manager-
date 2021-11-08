@@ -1,17 +1,38 @@
-<!-- 
-=========================================================
- Light Bootstrap Dashboard - v2.0.1
-=========================================================
+<!-- fetch data from rapport table -->
+<?php
+require_once('../classes/connect.php');
+$db = connect('../pharmacie.db');
 
- Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com)
- Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
+$year = date('y');
+$result = $db->prepare("SELECT * FROM tb_rapport_finance WHERE an = $year");
+$result->execute();
+$resul = $result->fetchAll();
 
- Coded by Creative Tim
+foreach ($resul as $res) {
+    $benefice[] = $res['benefice'];
+    $c_a[] = $res['ca'];
+    $mois[] = $res['mois'];
+}
+if (isset($mois) && isset($c_a) && isset($benefice)) {
+    $label = json_encode($mois);
+    $series1 = json_encode($benefice);
+    $series2 = json_encode($c_a);
+} else {
+    $mois = [];
+    $benefice = [];
+    $c_a = [];
+    $label = json_encode($mois);
+    $series1 = json_encode($benefice);
+    $series2 = json_encode($c_a);
+}
 
-=========================================================
 
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
+$sql = $db->prepare("SELECT * FROM `tb_profil`");
+$sql->execute();
+$profil = $sql->fetch();
+?>
+<!-- end fetch data from rapport table -->
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -24,8 +45,8 @@
     <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="assets2/css/css.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets2/css/font-awesome.min.css" />
     <!-- CSS Files -->
     <link href="assets2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets2/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
@@ -36,23 +57,24 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../img/aa.jpg" style="background-color: #00ffee;">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
-            <div class="sidebar-wrapper">
+        <div class="sidebar" data-color="black" data-image="../img/aa.jpg" style="background-color: #00ffee;">
+            <div class="sidebar-wrapper" style="overflow: hidden;">
                 <div class="logo">
                     <img src="../img/farmacia-logo.png" alt="logo" width="60px">
-                    <p>Pharmacie GILBERT</p>
+                    <p><?php echo $profil['name']; ?></p>
                 </div>
 
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../main.php">
-                        <i class="pe-7s-home"></i>
+                            <i class="pe-7s-home"></i>
                             <p>Page d'accueil</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../main.php?pg=profil" class="nav-link">
+                            <i class="pe-7s-user"></i>
+                            <p>Profil</p>
                         </a>
                     </li>
                     <li>
@@ -110,63 +132,17 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Dashboard </a>
+                    <a class="navbar-brand" href="../caisse/index.php" onclick="return window.confirm('Voulez-vous vraiment allez vers la caisse ?');"><i class="pe-7s-cart"></i> La caisse </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <i class="nc-icon nc-palette"></i>
-                                    <span class="d-lg-none">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="dropdown nav-item">
-                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <i class="nc-icon nc-planet"></i>
-                                    <span class="notification">5</span>
-                                    <span class="d-lg-none">Notification</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Notification 1</a>
-                                    <a class="dropdown-item" href="#">Notification 2</a>
-                                    <a class="dropdown-item" href="#">Notification 3</a>
-                                    <a class="dropdown-item" href="#">Notification 4</a>
-                                    <a class="dropdown-item" href="#">Another notification</a>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nc-icon nc-zoom-split"></i>
-                                    <span class="d-lg-block">&nbsp;Search</span>
-                                </a>
-                            </li>
-                        </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <span class="no-icon">Account</span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="no-icon">Dropdown</span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <span class="no-icon">Log out</span>
+                                <a href="../logout.php">
+                                    <i class="pe-7s-power">Se déconnecter</i>
                                 </a>
                             </li>
                         </ul>
@@ -177,92 +153,45 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        
-                        <div class="col-md-12">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Users Behavior</h4>
-                                    <p class="card-category">24 Hours performance</p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                            <div class="card-header ">
+                                <h4 class="card-title">Rapports d'activités</h4>
+                                <p class="card-category">Tous les produits sont hors Taxes</p>
+                                <!-- <input type="year"> -->
+                                <?php $years = range(2021, strftime("%Y", time())); ?>
+                                <select style="padding: 5px;">
+                                    <option><?="20".$year?></option>
+                                    <?php foreach ($years as $year2) : ?>
+                                        <option value="<?php echo $year2; ?>"><?php echo $year2; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                            </div>
+                            <div class="card-body ">
+                                <div id="chartActivity" class="ct-chart"></div>
+                            </div>
+                            <div class="card-footer ">
+                                <div class="legend">
+                                    <i class="fa fa-circle text-info"></i> Bénéfice et
+                                    <i class="fa fa-circle text-danger"></i> Chiffre d'affaire
                                 </div>
-                                <div class="card-body ">
-                                    <div id="chartHours" class="ct-chart"></div>
-                                </div>
-                                <div class="card-footer ">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                                    </div>
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-check"></i> Data information certified ✅
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card ">
-                                <div class="card-header ">
-                                    <h4 class="card-title">2017 Sales</h4>
-                                    <p class="card-category">All products including Taxes</p>
-                                </div>
-                                <div class="card-body ">
-                                    <div id="chartActivity" class="ct-chart"></div>
-                                </div>
-                                <div class="card-footer ">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                                        <i class="fa fa-circle text-danger"></i> BMW 5 Series
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-check"></i> Data information certified
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
+
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav>
-                        <ul class="footer-menu">
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Company
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                        <p class="copyright text-center">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                        </p>
-                    </nav>
-                </div>
-            </footer>
         </div>
+    </div>
     </div>
     <!--   -->
     <!-- <div class="fixed-plugin">
@@ -363,7 +292,40 @@
 <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
+        var data = {
+            labels: <?= $label ?>,
+            series: [
+                <?= $series1 ?>,
+                <?= $series2 ?>
+            ]
+        };
+
+        var options = {
+            seriesBarDistance: 10,
+            axisX: {
+                showGrid: false
+            },
+            height: "250px",
+            chartPadding: {
+                top: 0,
+                right: 5,
+                bottom: 0,
+                left: 60
+            }
+        };
+
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 5,
+                axisX: {
+                    labelInterpolationFnc: function(value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
+
+        var chartActivity = Chartist.Bar('#chartActivity', data, options, responsiveOptions);
 
         demo.showNotification();
 
