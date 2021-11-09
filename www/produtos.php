@@ -2,7 +2,6 @@
 include('classes/Mysql.php');
 if (isset($_GET['deletar'])) {
     $id = (int)$_GET['deletar'];
-
     $db->exec("DELETE FROM `tb_produtos` WHERE id = $id");
 }
 

@@ -72,18 +72,24 @@ $usuario = $_SESSION['nome'];
 
 
         </div>
-
+        <?php
+        $sql = $db->prepare("SELECT * FROM `tb_sortie`");
+        $sql->execute();
+        $produtos = $sql->fetchAll();
+        if ($produtos != null) :
+        ?>
         <div class="col-md-7">
             <div class="card" style="width: 340px;margin-left: 90px;">
                 <div class="alert alert-danger" role="alert">
                     <h4 class="alert-heading">Attention!</h4>
                     <p>Votre stock a été modifier par un caissier.</p>
-                    <a style="color: black; text-decoration: none;background-color:white;" class="btn" href="#">Click ici</a> si vous voulez voir les détails.
+                    <a style="color: black; text-decoration: none;background-color:white;" class="btn" href="?pg=quick-add-details">Click ici</a> si vous voulez voir les détails.
                     <hr>
                     <p class="mb-0">Ce caissier a eu recours à l'utilisation de la fonction <strong>Ajout rapide</strong>.</p>
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 
 </div>

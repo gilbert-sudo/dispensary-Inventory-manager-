@@ -11,14 +11,17 @@ if (isset($_POST['ajouter'])) {
     $quant = $new_quant + $old_quant;
     $update_stock = $db->prepare("UPDATE tb_produtos SET quantidade = ? WHERE id = $id");
     $update_stock->execute(array($quant));
-    $alert_stock = $db->prepare("SELECT * FROM tb_produtos WHERE id = $id");
-    $alert_stock->execute();
-    $alert_stock = $alert_stock->fetch();
-    if ($alert_stock){
-        $admin = $_SESSION['usuario'];
-        $program_stock = $db->prepare("INSERT INTO tb_sortie VALUES (null,?,?,?,?,?)");
-        $program_stock->execute(array($alert_stock['codInterno'], $alert_stock['descricao'], $new_quant, date('m/d/y'), $admin));
-    }
+
+    if (!isset($_SESSION['access'])) :
+        $alert_stock = $db->prepare("SELECT * FROM tb_produtos WHERE id = $id");
+        $alert_stock->execute();
+        $alert_stock = $alert_stock->fetch();
+        if ($alert_stock) {
+            $admin = $_SESSION['usuario'];
+            $program_stock = $db->prepare("INSERT INTO tb_sortie VALUES (null,?,?,?,?,?)");
+            $program_stock->execute(array($alert_stock['codInterno'], $alert_stock['descricao'], $new_quant, date('m/d/y'), $admin));
+        }
+    endif;
 }
 
 ?>
@@ -104,9 +107,9 @@ $nbr_row = count($nbr_add);
 <hr />
 <div id="actions" class="row">
     <div class="col-md-12">
-        <a href="?pg=produtos&page=<?=$currentPage?>" class="btn btn-danger">Retour</a>
+        <a href="?pg=produtos&page=<?= $currentPage ?>" class="btn btn-danger">Retour</a>
         <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
-            <a href="?pg=editar-produto&id=<?php echo $produto['id'] ?>&page=<?=$currentPage?>" class="btn btn-dark">Editer</a>
+            <a href="?pg=editar-produto&id=<?php echo $produto['id'] ?>&page=<?= $currentPage ?>" class="btn btn-dark">Editer</a>
         <?php endif; ?>
         <a href="?pg=quick-add&id=<?php echo $produto['id'] ?>" class="btn btn-primary">En ajouter</a>
         <?php if (isset($_SESSION['access']) && $_SESSION['access'] == 1) : ?>
@@ -114,7 +117,7 @@ $nbr_row = count($nbr_add);
                 <a href="?pg=programmed-add&id=<?php echo $produto['id'] ?>" class="btn btn-warning">Ajout programmé</a>
             <?php endif; ?>
             <?php if ($nbr_row == 1) : ?>
-                <a href="php/cancel_programmed_add.php?quantity=<?= $nbr_add[0];?>&old_quant=<?= $produto['quantidade'];?>&delete=<?=$produto['id'];?>" class="btn btn-danger">Annuler l'ajout programmé</a>
+                <a href="php/cancel_programmed_add.php?quantity=<?= $nbr_add[0]; ?>&old_quant=<?= $produto['quantidade']; ?>&delete=<?= $produto['id']; ?>" class="btn btn-danger">Annuler l'ajout programmé</a>
             <?php endif; ?>
         <?php endif; ?>
 
