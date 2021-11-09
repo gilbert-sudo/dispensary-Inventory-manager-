@@ -1,5 +1,5 @@
 <?php
-include( 'classes/Mysql.php' );
+include('classes/Mysql.php');
 $usuario = $_SESSION['nome'];
 ?>
 <div class="home">
@@ -14,16 +14,54 @@ $usuario = $_SESSION['nome'];
 
             <!--Weather Forecast courtesy of www.tititudorancea.com-->
             <style>
-                .WFOT1 {border:2px solid #E1E1E1; background-color:#F1F1F1; padding:10px}
-                .WFH1 {font:bold 14px Arial, sans-serif; margin-bottom:6px}
-                TABLE.WFOT TD {vertical-align:top}
-                .FCOVTMP {font:14px Arial, sans-serif; line-height:16px; padding-bottom:4px}
-                .FCOVEXP {font:12px Arial, sans-serif; line-height:14px; text-align:center}
-                .WFI {background-color:#3399FF;padding:0}
-                .WTL {color:blue;font-weight:bold}
-                .WTH {color:red;float:right;font-weight:bold}
+                .WFOT1 {
+                    border: 2px solid #E1E1E1;
+                    background-color: #F1F1F1;
+                    padding: 10px
+                }
 
-                .WFDAY {font-size:12px;text-align:center;font-weight:bold}
+                .WFH1 {
+                    font: bold 14px Arial, sans-serif;
+                    margin-bottom: 6px
+                }
+
+                TABLE.WFOT TD {
+                    vertical-align: top
+                }
+
+                .FCOVTMP {
+                    font: 14px Arial, sans-serif;
+                    line-height: 16px;
+                    padding-bottom: 4px
+                }
+
+                .FCOVEXP {
+                    font: 12px Arial, sans-serif;
+                    line-height: 14px;
+                    text-align: center
+                }
+
+                .WFI {
+                    background-color: #3399FF;
+                    padding: 0
+                }
+
+                .WTL {
+                    color: blue;
+                    font-weight: bold
+                }
+
+                .WTH {
+                    color: red;
+                    float: right;
+                    font-weight: bold
+                }
+
+                .WFDAY {
+                    font-size: 12px;
+                    text-align: center;
+                    font-weight: bold
+                }
             </style>
             <div style="position:relative;background-color:#FFFFFF;margin-left: 45px">
                 <div id="wf_div"></div>
@@ -35,44 +73,17 @@ $usuario = $_SESSION['nome'];
 
         </div>
 
-            <div class="col-md-7">
-                <div class="card" style="width: 340px;height: 300px;margin-left: 90px;background-color:#fffa90">
-                    <div class="table-responsive col-md-12">
-                        <?php
-                        $data = date( 'Y/m/d' );
-                        $sql = $db->prepare( "SELECT * FROM tb_lembrete" );
-                        $sql->execute();
-                        $lembrete = $sql->fetchAll();
-                        ?>
-                        <h3>Notes autocollantes</h3>
-                        <br/>
-                        <table class="table table-striped table-responsive" cellspacing="0" cellpadding="0"
-                               style="width : 100px;" 
-                        >
-                        <thead>
-
-                        <?php
-                        foreach ($lembrete as $value):
-                            ?>
-                            <tr style="width: 100px">
-                                <td style="width: 100px">
-                                    <p><?php echo $value['texto'] ?></p>
-                                </td>
-                            </tr>
-                        <?php
-                        endforeach;
-                        ?>
-                        </thead>
-                        <tbody>
-                        <tr>
-
-                        </tr>
-                        </tbody>
-                        </table>
-                    </div>
+        <div class="col-md-7">
+            <div class="card" style="width: 340px;margin-left: 90px;">
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Attention!</h4>
+                    <p>Votre stock a été modifier par un caissier.</p>
+                    <a style="color: black; text-decoration: none;background-color:white;" class="btn" href="#">Click ici</a> si vous voulez voir les détails.
+                    <hr>
+                    <p class="mb-0">Ce caissier a eu recours à l'utilisation de la fonction <strong>Ajout rapide</strong>.</p>
                 </div>
             </div>
         </div>
-
     </div>
 
+</div>

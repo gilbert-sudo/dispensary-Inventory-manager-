@@ -11,6 +11,14 @@ if (isset($_POST['ajouter'])) {
     $quant = $new_quant + $old_quant;
     $update_stock = $db->prepare("UPDATE tb_produtos SET quantidade = ? WHERE id = $id");
     $update_stock->execute(array($quant));
+    $alert_stock = $db->prepare("SELECT * FROM tb_produtos WHERE id = $id");
+    $alert_stock->execute();
+    $alert_stock = $alert_stock->fetch();
+    if ($alert_stock){
+        $admin = $_SESSION['usuario'];
+        $program_stock = $db->prepare("INSERT INTO tb_sortie VALUES (null,?,?,?,?,?)");
+        $program_stock->execute(array($alert_stock['codInterno'], $alert_stock['descricao'], $new_quant, date('m/d/y'), $admin));
+    }
 }
 
 ?>

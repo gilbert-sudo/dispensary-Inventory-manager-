@@ -120,6 +120,9 @@ include('classes/Mysql.php');
                             $date = $_GET['date_invoice'];
                             $date = date_parse($date);
                             $day = $date['day'];
+                            if ($day < 10) {
+                                $day = '0' . $day;
+                            }
                             $month = $date['month'];
                             $year = $date['year'];
                             $year = substr($year, 2);
