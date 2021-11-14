@@ -265,7 +265,7 @@ const searchStates = async searchText => {
         qty2.value = '';
         matchList.innerHTML = '';
     }
-    if (matches.length > 0 && matches.length < 4) {
+    if (matches.length > 0 && matches.length < 10) {
        
         outputHTML(matches);
     }

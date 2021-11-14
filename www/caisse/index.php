@@ -137,10 +137,6 @@ if (isset($_GET['item'])) {
             </div>
 
           </form>
-
-          <?php if (isset($_GET['finaliser'])) {
-            include('cupon-fiscal.php');
-          } ?>
         </div>
       </div>
       <!-- fin affichage panier -->

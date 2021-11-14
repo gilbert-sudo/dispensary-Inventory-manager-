@@ -26,7 +26,7 @@ $user = $_POST['cliente'];
 $mode = $_POST['pagamento'];
 $state = userExist($user);
            if ($state) {
-            header("location: ../index.php?finaliser=1&numero=$numero&total=$total&client=$user&mode=$mode");
+            header("location: ../cupon-fiscal.php?finaliser=1&numero=$numero&total=$total&client=$user&mode=$mode");
            } else {
             $errMess = '⚠ Ce client n\'est pas encore enregistré dans votre base de donnée ‼';
             header("Location: ../facture.php?total=$total&numero=$numero&errMess=$errMess&mode=$mode");
