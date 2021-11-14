@@ -41,6 +41,7 @@ if (isset($_GET['item'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/logout.css">
   <title>Logiciel vente</title>
 </head>
 
@@ -62,7 +63,7 @@ if (isset($_GET['item'])) {
           <td>
             <p class="text">DISPENSAIRE ANGLICAN TSINJOHASINA</p>
           </td>
-          <td><a href="php/actual.php?reload=true" class="btn btn-danger loggout" style="position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;" onMouseOut="this.style='position: absolute;right: 5%;top: 0%;color: #00a99d;border: 2px solid #00a99d;background-color: white;text-decoration: none;'" onMouseOver="this.style='position: absolute;right: 5%;top: 0%;color: white;border: 2px solid #00a99d;background-color: #00a99d;text-decoration: none;'">Actualiser</a></td>
+          <td><a href="../logout.php" class="btn btn-danger loggout">Se déconnecter</a></td>
         </table>
       </div>
 
