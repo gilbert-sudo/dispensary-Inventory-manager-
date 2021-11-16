@@ -26,7 +26,7 @@ if (isset($_GET['err'])) {
 <div class="row">
     <div class="col-md-12">
         <button type="submit" name="acao" class="btn btn-primary">Enregistrer</button>
-        <a href="?pg=fornecedores" class="btn btn-default">Annuler</a>
+        <a href="?pg=categorie" class="btn btn-danger">Retour</a>
     </div>
 </div>
 

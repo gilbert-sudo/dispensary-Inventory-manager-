@@ -3,7 +3,8 @@ include '../classes/connect.php';
 $db = connect('../pharmacie.db');
 
         if (isset($_POST['acao'])) {
-            $descricao = $_POST['descricao'];
+            $descricao1 = $_POST['descricao'];
+            $descricao = str_replace("'", "", $descricao1);
             $codInterno = $_POST['codInterno'];
             $codBarras = ' ';
             $fornecedor = $_POST['fornecedor'];
